@@ -1,0 +1,323 @@
+/* =========================================================
+   جامعہ دارالعلوم اسلامیہ مردان - Darul Uloom Islamia Mardan
+   Design System - Authentic Royal Navy & Sky Blue Palette
+   ========================================================= */
+
+:root {
+  /* Theme Colors extracted from Darul Uloom Islamia Mardan Logo */
+  --color-primary: #18225E;          /* Deep Islamic Royal Navy (Logo Arch & Text) */
+  --color-primary-dark: #0F1640;     /* Deep Midnight Navy */
+  --color-primary-light: #26368C;    /* Rich Sapphire Blue */
+  
+  --color-sky: #0284C7;              /* Vivid Sky Blue (Logo Banner & Crescent) */
+  --color-sky-light: #0EA5E9;        /* Bright Cyan Sky */
+  --color-sky-lighter: #38BDF8;      /* Luminous Sky Highlight */
+  --color-sky-soft: #E0F2FE;         /* Soft Ice Sky Tint */
+  --color-sky-bg: #F0F9FF;           /* Very Light Ice Blue Background */
+  
+  --color-bg-main: #FFFFFF;          /* Pure White */
+  --color-bg-alt: #F8FAFC;           /* Crisp Slate 50 */
+  --color-bg-card: #FFFFFF;          /* Card Background */
+  
+  --color-text-main: #0F172A;        /* Deep Charcoal Navy Text */
+  --color-text-muted: #475569;       /* Medium Slate Text */
+  --color-text-light: #64748B;       /* Light Slate Text */
+  --color-text-white: #FFFFFF;       /* Pure White Text */
+  --color-text-sky: #0284C7;         /* Sky Accent Text */
+
+  --color-border: #E2E8F0;          /* Subtle Slate Border */
+  --color-border-sky: #BAE6FD;      /* Soft Sky Border */
+  --color-border-hover: #38BDF8;    /* Interactive Sky Border */
+
+  /* Typography */
+  --font-urdu: 'Noto Nastaliq Urdu', 'Amiri', serif, Tahoma, sans-serif;
+  --font-arabic: 'Amiri', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Elevation Shadows (Navy / Sky Tone) */
+  --shadow-sm: 0 1px 3px rgba(24, 34, 94, 0.06), 0 1px 2px rgba(24, 34, 94, 0.04);
+  --shadow-md: 0 4px 12px rgba(24, 34, 94, 0.08), 0 2px 4px rgba(2, 132, 199, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(24, 34, 94, 0.12), 0 4px 8px -2px rgba(2, 132, 199, 0.08);
+  --shadow-xl: 0 20px 35px -5px rgba(24, 34, 94, 0.16), 0 10px 15px -5px rgba(2, 132, 199, 0.1);
+
+  /* Transitions & Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-urdu);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-main);
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-urdu);
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  transition: var(--transition);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Common Layout Wrapper */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Common Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-text-white);
+  box-shadow: 0 4px 14px rgba(24, 34, 94, 0.25);
+  border: 1px solid var(--color-primary-light);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 34, 94, 0.35);
+  color: var(--color-text-white);
+}
+
+.btn-sky {
+  background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-sky-light) 100%);
+  color: var(--color-text-white);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+  border: 1px solid var(--color-sky-lighter);
+}
+
+.btn-sky:hover {
+  background: linear-gradient(135deg, #0369A1 0%, var(--color-sky) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+  color: var(--color-text-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  transform: translateY(-2px);
+}
+
+.btn-outline-sky {
+  background-color: transparent;
+  color: var(--color-sky);
+  border: 1.5px solid var(--color-sky);
+}
+
+.btn-outline-sky:hover {
+  background-color: var(--color-sky);
+  color: var(--color-text-white);
+  transform: translateY(-2px);
+}
+
+.btn-white {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-white:hover {
+  background-color: var(--color-sky-soft);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-lg {
+  padding: 13px 28px;
+  font-size: 1.1rem;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.badge-sky {
+  background-color: var(--color-sky-soft);
+  color: var(--color-sky);
+  border: 1px solid var(--color-border-sky);
+}
+
+.badge-navy {
+  background-color: rgba(24, 34, 94, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(24, 34, 94, 0.15);
+}
+
+/* Section Common Styling */
+.section {
+  padding: 60px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 45px auto;
+}
+
+.section-tag {
+  font-family: var(--font-sans);
+  color: var(--color-sky);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-sky), var(--color-primary));
+  border-radius: var(--radius-full);
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  margin-top: 14px;
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .grid-4, .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-4, .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .section-title {
+    font-size: 1.75rem;
+  }
+  .section {
+    padding: 40px 0;
+  }
+}
