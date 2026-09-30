@@ -9,6 +9,8 @@ import AboutPage from './pages/AboutPage';
 import DepartmentsPage from './pages/DepartmentsPage';
 import AdmissionsPage from './pages/AdmissionsPage';
 import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
+import AdminPage from './pages/AdminPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -45,6 +47,8 @@ export default function App() {
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="/admission" element={<AdmissionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           {/* Catch-all fallback */}
           <Route path="*" element={<HomePage />} />
         </Route>

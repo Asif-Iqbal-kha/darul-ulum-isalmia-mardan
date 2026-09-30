@@ -15,6 +15,7 @@
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
+  gap: 16px;
 }
 
 /* Brand Identity */
@@ -91,6 +92,40 @@
   font-weight: 700;
 }
 
+/* Actions & Login Button */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-login-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background-color: var(--color-sky-soft);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border-sky);
+  border-radius: var(--radius-md);
+  font-family: var(--font-urdu);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-login-small:hover {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+.btn-login-small.active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
 /* Mobile Toggle */
 .mobile-menu-btn {
   display: none;
@@ -130,7 +165,14 @@
   background-color: var(--color-sky-soft);
 }
 
-@media (max-width: 768px) {
+.mobile-nav-link.login-highlight {
+  background-color: var(--color-sky-bg);
+  color: var(--color-sky);
+  font-weight: 700;
+  border: 1px solid var(--color-border-sky);
+}
+
+@media (max-width: 860px) {
   .desktop-nav {
     display: none;
   }

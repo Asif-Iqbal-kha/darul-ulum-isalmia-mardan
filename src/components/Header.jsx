@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogIn, UserCheck } from 'lucide-react';
 import './Header.css';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   const navLinks = [
     { path: '/', label: 'صفحہ اول' },
@@ -52,15 +55,30 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          className="mobile-menu-btn"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="مینو"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Right Actions: Login Button */}
+        <div className="header-actions">
+          {isLoggedIn ? (
+            <Link to="/admin" className="btn-login-small active">
+              <UserCheck size={16} />
+              <span>ایڈمن پینل</span>
+            </Link>
+          ) : (
+            <Link to="/login" className="btn-login-small">
+              <LogIn size={16} />
+              <span>لاگ ان</span>
+            </Link>
+          )}
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            className="mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="مینو"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
@@ -79,6 +97,15 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to={isLoggedIn ? '/admin' : '/login'}
+                  className="mobile-nav-link login-highlight"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {isLoggedIn ? 'ایڈمن پینل' : 'لاگ ان (Login)'}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
