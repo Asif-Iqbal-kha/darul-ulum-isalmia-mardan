@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, LogIn, UserCheck } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, LogIn, UserCheck, Sparkles } from 'lucide-react';
 import './Header.css';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
@@ -25,16 +24,24 @@ export default function Header() {
 
   return (
     <header className="site-header">
+      {/* Decorative Top Accent Stripe */}
+      <div className="header-top-accent"></div>
+
       <div className="container header-container">
         {/* Logo & Title */}
         <Link to="/" className="brand-box" onClick={() => setIsMobileMenuOpen(false)}>
-          <img 
-            src="/logo.png" 
-            alt="دارالعلوم اسلامیہ مردان" 
-            className="brand-logo" 
-          />
+          <div className="brand-logo-frame">
+            <img 
+              src="/logo.png" 
+              alt="دارالعلوم اسلامیہ مردان" 
+              className="brand-logo" 
+            />
+          </div>
           <div className="brand-text">
-            <span className="brand-slogan">العلم نور</span>
+            <span className="brand-slogan">
+              <Sparkles size={12} className="slogan-sparkle" />
+              العلم نور
+            </span>
             <h1 className="brand-title">دارالعلوم اسلامیہ مردان</h1>
           </div>
         </Link>
@@ -49,6 +56,7 @@ export default function Header() {
                   className={`nav-link ${isActive(link.path) ? 'active' : ''}`}
                 >
                   {link.label}
+                  {isActive(link.path) && <span className="nav-active-pill"></span>}
                 </Link>
               </li>
             ))}

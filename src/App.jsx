@@ -23,8 +23,8 @@ function ScrollToTop() {
   return null;
 }
 
-// Global Layout with Header and Footer
-function MainLayout() {
+// Public Layout with Decorated Header and Footer
+function PublicLayout() {
   return (
     <div className="app-layout">
       <Header />
@@ -41,17 +41,20 @@ export default function App() {
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route element={<MainLayout />}>
+        {/* Public Website Routes (with Header & Footer) */}
+        <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="/admission" element={<AdmissionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={<AdminPage />} />
           {/* Catch-all fallback */}
           <Route path="*" element={<HomePage />} />
         </Route>
+
+        {/* Dedicated Admin Portal Route (NO Header, NO Footer) */}
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </Router>
   );
