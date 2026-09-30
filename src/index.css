@@ -1,6 +1,6 @@
 /* =========================================================
    جامعہ دارالعلوم اسلامیہ مردان - Darul Uloom Islamia Mardan
-   Design System - Authentic Royal Navy & Sky Blue Palette
+   Design System - Fast Online Nastaleeq Typography (< 150KB)
    ========================================================= */
 
 :root {
@@ -29,9 +29,9 @@
   --color-border-sky: #BAE6FD;      /* Soft Sky Border */
   --color-border-hover: #38BDF8;    /* Interactive Sky Border */
 
-  /* Typography */
-  --font-urdu: 'Noto Nastaliq Urdu', 'Amiri', serif, Tahoma, sans-serif;
-  --font-arabic: 'Amiri', serif;
+  /* Fast Online Urdu Nastaleeq Typography Stack (< 150KB) */
+  --font-urdu: 'Gulzar', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaliq', 'Amiri', serif, Tahoma, sans-serif;
+  --font-arabic: 'Amiri', 'Gulzar', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Elevation Shadows (Navy / Sky Tone) */
@@ -65,7 +65,7 @@ body {
   font-family: var(--font-urdu);
   background-color: var(--color-bg-alt);
   color: var(--color-text-main);
-  line-height: 1.8;
+  line-height: 2.1;
   direction: rtl;
   text-align: right;
   -webkit-font-smoothing: antialiased;
@@ -78,11 +78,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-urdu);
   color: var(--color-primary);
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 p {
   color: var(--color-text-muted);
+  line-height: 2.1;
 }
 
 a {
@@ -136,12 +137,13 @@ button {
   justify-content: center;
   gap: 8px;
   padding: 10px 22px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   border-radius: var(--radius-md);
   transition: var(--transition);
   text-decoration: none;
   cursor: pointer;
+  line-height: 1.6;
 }
 
 .btn-primary {
@@ -210,7 +212,7 @@ button {
 
 .btn-lg {
   padding: 13px 28px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 /* Badge Styles */
@@ -219,7 +221,7 @@ button {
   align-items: center;
   gap: 6px;
   padding: 4px 14px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 600;
   border-radius: var(--radius-full);
 }
@@ -238,7 +240,7 @@ button {
 
 /* Section Common Styling */
 .section {
-  padding: 60px 0;
+  padding: 65px 0;
   position: relative;
 }
 
@@ -252,7 +254,7 @@ button {
   font-family: var(--font-sans);
   color: var(--color-sky);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 8px;
@@ -260,7 +262,7 @@ button {
 }
 
 .section-title {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   color: var(--color-primary);
   margin-bottom: 12px;
   position: relative;
@@ -280,7 +282,7 @@ button {
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--color-text-muted);
   margin-top: 14px;
 }
@@ -315,7 +317,7 @@ button {
     grid-template-columns: 1fr;
   }
   .section-title {
-    font-size: 1.75rem;
+    font-size: 1.85rem;
   }
   .section {
     padding: 40px 0;
