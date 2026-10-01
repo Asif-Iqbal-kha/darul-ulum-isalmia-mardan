@@ -1,0 +1,37 @@
+const mongoose = require('mongoose');
+
+const newsSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, 'Title is required'],
+    trim: true,
+  },
+  content: {
+    type: String,
+    required: [true, 'Content is required'],
+  },
+  category: {
+    type: String,
+    enum: ['announcement', 'news', 'event'],
+    default: 'news',
+  },
+  isPublished: {
+    type: Boolean,
+    default: false,
+  },
+  publishDate: {
+    type: String,
+    default: '',
+  },
+  image: {
+    type: String,
+    default: null,
+  },
+}, {
+  timestamps: true,
+});
+
+newsSchema.index({ isPublished: 1, publishDate: -1 });
+newsSchema.index({ isPopup: 1, isPublished: 1, publishDate: -1 });
+
+module.exports = mongoose.model('News', newsSchema);

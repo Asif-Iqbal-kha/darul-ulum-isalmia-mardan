@@ -1,0 +1,303 @@
+/* ===== Fitwat / Fatwa Page Styles ===== */
+/* Isolated styles — all class names prefixed with fitwat- to avoid conflicts */
+
+/* Search Bar */
+.fitwat-search-form {
+  margin-bottom: var(--space-xl);
+}
+
+.fitwat-search-inner {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.fitwat-search-input {
+  flex: 1;
+  border-radius: var(--radius-md);
+}
+
+.fitwat-search-btn {
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+/* Category Filter */
+.fitwat-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+
+.fitwat-cat-btn {
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+/* Top Row */
+.fitwat-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fitwat-count-label {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.fitwat-ask-cta {
+  gap: 8px;
+}
+
+/* Empty State */
+.fitwat-empty {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-lg);
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Fatwa List */
+.fitwat-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Fatwa Card */
+.fitwat-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  border-right: 3px solid var(--color-accent);
+  padding: var(--space-lg);
+  cursor: pointer;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  outline: none;
+}
+
+.fitwat-card:hover,
+.fitwat-card:focus {
+  box-shadow: var(--shadow-md);
+  border-right-color: var(--color-primary);
+}
+
+.fitwat-card-body {
+  margin-bottom: var(--space-sm);
+}
+
+.fitwat-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.fitwat-card-date {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-english);
+}
+
+.fitwat-cat-badge {
+  font-size: 0.75rem;
+}
+
+.fitwat-card-question {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  line-height: 2;
+  border-right: 3px solid var(--color-accent);
+  padding-right: var(--space-sm);
+}
+
+.fitwat-card-answer-preview {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+
+.fitwat-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-light);
+  margin-top: var(--space-sm);
+}
+
+.fitwat-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.fitwat-views {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-english);
+}
+
+/* Pagination */
+.fitwat-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+}
+
+.fitwat-page-info {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-english);
+}
+
+/* ---- Detail View ---- */
+.fitwat-back-btn {
+  margin-bottom: var(--space-lg);
+  gap: 6px;
+}
+
+.fitwat-detail-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.fitwat-detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border-light);
+  flex-wrap: wrap;
+}
+
+.fitwat-detail-date {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-english);
+}
+
+.fitwat-detail-section {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.fitwat-question-block {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.fitwat-section-label {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-on-dark);
+  background-color: var(--color-primary);
+  padding: 2px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.5px;
+}
+
+.fitwat-answer-label {
+  background-color: var(--color-accent);
+}
+
+.fitwat-detail-text {
+  font-size: 1.1rem;
+  line-height: 2.15;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.fitwat-asker {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  font-style: italic;
+}
+
+.fitwat-answer-block {
+  background-color: #FFFEF5;
+  border-right: 4px solid var(--color-accent);
+}
+
+.fitwat-answer-content {
+  margin-bottom: var(--space-md);
+}
+
+.fitwat-answer-footer {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: left;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: var(--space-md);
+  margin-top: var(--space-md);
+  font-style: italic;
+}
+
+/* ---- Ask Modal ---- */
+.fitwat-ask-modal {
+  max-width: 620px;
+  width: 100%;
+}
+
+.fitwat-ask-note {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  border-right: 3px solid var(--color-accent);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .fitwat-search-inner {
+    flex-direction: column;
+  }
+
+  .fitwat-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fitwat-categories {
+    gap: 6px;
+  }
+
+  .fitwat-detail-meta {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .fitwat-detail-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .fitwat-pagination {
+    gap: var(--space-sm);
+  }
+}

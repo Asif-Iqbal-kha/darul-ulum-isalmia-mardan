@@ -1,0 +1,278 @@
+import { useState, useEffect } from 'react';
+import SEOHead from '../../components/common/SEOHead';
+import { Link } from 'react-router-dom';
+import { getNews, getStats, getClasses } from '../../services/api';
+import {
+  FiUsers,
+  FiBookOpen,
+  FiUser,
+  FiCheckSquare,
+  FiArrowLeft,
+  FiShield,
+  FiAward,
+} from 'react-icons/fi';
+import './PublicPages.css';
+
+const DEFAULT_STATS = {
+  totalStudents: 4,
+  totalTeachers: 1,
+  totalClasses: 1,
+  attendancePercentage: 50,
+};
+
+const DEFAULT_CLASSES = [
+  {
+    _id: '6aa52ff9a497b16f15435bd0',
+    name: 'حفظ القرآن (Hafiz)',
+    year: '1447',
+    studentsCount: 4,
+  },
+];
+
+const DEFAULT_NEWS = [
+  {
+    _id: '6a917e726f135480c1e544da',
+    title: 'سالانہ امتحانات کا شیڈول جاری',
+    publishDate: '2026-03-01',
+    content: 'جامعہ دارالعلوم اسلامیہ مردان میں سالانہ امتحانات کے شیڈول کا باقاعدہ اعلان کر دیا گیا ہے۔ تمام طلباء بروقت تیاری مکمل کریں۔',
+  },
+  {
+    _id: '6a917e726f135480c1e544db',
+    title: 'نئے تعلیمی سال کے داخلے شروع',
+    publishDate: '2026-02-15',
+    content: 'شعبہ حفظ القرآن، ناظرہ اور دینی درجات میں نئے داخلوں کا آغاز ہو چکا ہے۔ خواہش مند حضرات آن لائن یا دفتر مدرسہ سے رابطہ کریں۔',
+  },
+  {
+    _id: '6a917e726f135480c1e544dc',
+    title: 'حفظ القرآن تقریب تقسیم اسناد',
+    publishDate: '2026-01-20',
+    content: 'قرآن مجید مکمل کرنے والے خوش نصیب حفاظ کرام کے لیے خصوصی تقریبِ دستار بندی و تقسیم اسناد کا انعقاد کیا گیا۔',
+  },
+];
+
+export default function HomePage() {
+  const [news, setNews] = useState(DEFAULT_NEWS);
+  const [stats, setStats] = useState(DEFAULT_STATS);
+  const [classes, setClasses] = useState(DEFAULT_CLASSES);
+
+  useEffect(() => {
+    // 1. Fetch Aggregated Statistics (students, teachers, classes, attendance)
+    getStats()
+      .then((data) => {
+        if (data && typeof data === 'object' && data.totalStudents !== undefined) {
+          setStats({
+            totalStudents: data.totalStudents || 0,
+            totalTeachers: data.totalTeachers || 0,
+            totalClasses: data.totalClasses || 0,
+            attendancePercentage: data.attendancePercentage || 0,
+          });
+        }
+      })
+      .catch((err) => console.warn('Home stats load error:', err));
+
+    // 2. Fetch Active Classes
+    getClasses()
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setClasses(data);
+        }
+      })
+      .catch((err) => console.warn('Home classes load error:', err));
+
+    // 3. Fetch Latest News & Announcements
+    getNews(true)
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setNews(data.slice(0, 3));
+        }
+      })
+      .catch((err) => console.warn('Home news load error:', err));
+  }, []);
+
+  return (
+    <div className="home-page">
+      <SEOHead
+        titleEn="Jamia Darul Uloom Islamia Mardan"
+        titleUr="جامعہ دارالعلوم اسلامیہ مردان"
+        descEn="Jamia Darul Uloom Islamia Mardan KPK Pakistan - Wifaq ul Madaris affiliated. Quran Hifz, Nazira, Dars-e-Nizami Islamic education."
+        descUr="جامعہ دارالعلوم اسلامیہ مردان - وفاق المدارس العربیہ پاکستان سے الحاق شدہ۔ حفظ قرآن، ناظرہ، درس نظامی"
+        path="/"
+      />
+      {/* Hero Banner */}
+      <section className="hero">
+        <div className="hero-overlay"></div>
+        <div className="container hero-content">
+          {/* Official Letterhead Header Row */}
+          <div className="hero-header-row">
+            <div className="hero-header-side hero-header-right">
+              رجسٹرڈ آف حکومت پاکستان (1860)
+            </div>
+
+            <div className="hero-logo-wrapper">
+              <img src="/logo.png" alt="جامعہ دارالعلوم اسلامیہ مردان" className="hero-logo-img" />
+            </div>
+
+            <div className="hero-header-side hero-header-left">
+              ملحق وفاق المدارس العربیہ پاکستان (14303)
+            </div>
+          </div>
+
+          <h1 className="hero-title">جامعہ دارالعلوم اسلامیہ مردان</h1>
+          <p className="hero-subtitle-en">Jamia Darul Uloom Islamia Mardan</p>
+
+          <p className="hero-desc">
+            <a href="https://maps.app.goo.gl/VNxyjrHUKwRC9v2U7" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+              مردان، خیبرپختونخوا، پاکستان (لوکیشن گوگل میپ)
+            </a> — تعلیم القرآن و حفظ اور دینی علوم کا مرکز
+          </p>
+          <div className="hero-actions">
+            <Link to="/admission" className="btn btn-accent btn-lg">داخلہ معلومات</Link>
+            <Link to="/about" className="btn btn-outline btn-lg hero-btn-outline">مدرسہ کا تعارف و منہاج</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Bar */}
+      <section className="stats-bar">
+        <div className="container">
+          <div className="grid grid-4">
+            <div className="stat-card">
+              <FiUsers size={28} className="stat-icon" />
+              <div className="stat-number">{stats.totalStudents}</div>
+              <div className="stat-label">کل طلباء</div>
+            </div>
+            <div className="stat-card">
+              <FiUser size={28} className="stat-icon" />
+              <div className="stat-number">{stats.totalTeachers}</div>
+              <div className="stat-label">اساتذہ کرام</div>
+            </div>
+            <div className="stat-card">
+              <FiBookOpen size={28} className="stat-icon" />
+              <div className="stat-number">{stats.totalClasses}</div>
+              <div className="stat-label">درجات</div>
+            </div>
+            <div className="stat-card">
+              <FiCheckSquare size={28} className="stat-icon" />
+              <div className="stat-number">{stats.attendancePercentage}%</div>
+              <div className="stat-label">حاضری شرح</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Objectives Section */}
+      <section className="section" style={{ backgroundColor: '#ffffff' }}>
+        <div className="container">
+          <h2 className="section-title">دینی مدارس کا بنیادی مقصد اور اہم مقاصد</h2>
+          <div className="objectives-lead-card" style={{ marginBottom: '28px' }}>
+            دینی مدارس کا بنیادی مقصد قرآن و سنت کی روشنی میں طلبا کو اسلامی تعلیمات سے روشناس کرانا اور معاشرے کے لیے ایسے صالح اور باعمل افراد تیار کرنا ہے جو دین کی صحیح فہم و فراست رکھتے ہوں۔
+          </div>
+
+          <div className="objectives-grid">
+            <div className="objective-item-card">
+              <div className="objective-card-header">
+                <div className="objective-card-icon">
+                  <FiBookOpen size={22} />
+                </div>
+                <h3 className="objective-card-title">دینی علوم کا تحفظ</h3>
+              </div>
+              <p className="objective-card-desc">
+                وحی الٰہی یعنی قرآن و سنت کے علوم کو محفوظ کرنا اور انہیں سینہ بسینہ اگلی نسلوں تک منتقل کرنا۔
+              </p>
+            </div>
+
+            <div className="objective-item-card">
+              <div className="objective-card-header">
+                <div className="objective-card-icon">
+                  <FiAward size={22} />
+                </div>
+                <h3 className="objective-card-title">کردار اور اخلاقی تربیت</h3>
+              </div>
+              <p className="objective-card-desc">
+                طلبا کی اخلاقی و روحانی تربیت کرنا تاکہ وہ عملی زندگی میں اسلامی اصولوں کے مطابق زندگی بسر کر سکیں۔
+              </p>
+            </div>
+
+            <div className="objective-item-card">
+              <div className="objective-card-header">
+                <div className="objective-card-icon">
+                  <FiUsers size={22} />
+                </div>
+                <h3 className="objective-card-title">دینی قیادت کی فراہمی</h3>
+              </div>
+              <p className="objective-card-desc">
+                معاشرے کو مسجد و محراب کے لیے امام، خطیب، مفتی اور معلم مہیا کرنا جو دینی مسائل میں عوام کی رہنمائی کر سکیں۔
+              </p>
+            </div>
+
+            <div className="objective-item-card">
+              <div className="objective-card-header">
+                <div className="objective-card-icon">
+                  <FiShield size={22} />
+                </div>
+                <h3 className="objective-card-title">اسلامی اقدار کا دفاع</h3>
+              </div>
+              <p className="objective-card-desc">
+                اسلامی عقائد، ثقافت اور اقدار کا تحفظ کرنا اور وقت کے فکری و نظری چیلنجز کا علمی انداز میں مقابلہ کرنا۔
+              </p>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '28px' }}>
+            <Link to="/about" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span>دینی درس گاہوں کے منہاج و مقاصد کی مکمل تفصیلات پڑھیں</span>
+              <FiArrowLeft size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Classes Section */}
+      <section className="section section-alt">
+        <div className="container">
+          <h2 className="section-title">ہمارے درجات</h2>
+          <div className="classes-grid">
+            {classes.map((cls) => (
+              <div key={cls._id} className="class-card">
+                <h3>{cls.name}</h3>
+                <p>
+                  تعلیمی سال: <span style={{ fontFamily: 'var(--font-english)' }}>{cls.year}</span>
+                </p>
+                <div className="class-card-footer">
+                  <span>
+                    طلباء: <strong style={{ fontFamily: 'var(--font-english)' }}>{cls.studentsCount || 0}</strong>
+                  </span>
+                  <span className="badge badge-success">فعال</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* News & Announcements */}
+      <section className="section">
+        <div className="container">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <h2 className="section-title" style={{ margin: 0 }}>تازہ ترین اعلانات</h2>
+            <Link to="/news" className="btn btn-outline btn-sm">
+              تمام اعلانات <FiArrowLeft style={{ marginRight: '4px' }} />
+            </Link>
+          </div>
+          <div className="grid grid-3">
+            {news.map((item) => (
+              <div key={item._id} className="news-card">
+                <div className="news-card-date">{item.publishDate}</div>
+                <h3>{item.title}</h3>
+                <p>{item.content ? item.content.substring(0, 100) : ''}...</p>
+                <Link to="/news" className="news-card-link">
+                  مزید پڑھیں <FiArrowLeft />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

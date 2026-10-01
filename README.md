@@ -1,51 +1,58 @@
-# جامعہ دارالعلوم اسلامیہ مردان (Darul Uloom Islamia Mardan)
+# جامعہ دارالعلوم اسلامیہ مردان - ویب ایپلیکیشن
 
-> **العلم نور** — Official web portal for Jamia Darul Uloom Islamia Mardan, Khyber Pakhtunkhwa, Pakistan.
+Madrassa Arabia Sayedina Sadeeq-e-Akbar (RA) - Mardan
 
----
+## تکنیکی اسٹیک
 
-## 📖 Introduction
-Official website for **Darul Uloom Islamia Mardan**, designed with a modern Islamic institutional theme matching the official logo (Royal Navy `#18225E` & Sky Blue `#0284C7`).
-
-### 🌟 Features & Pages
-- **صفحہ اول (Home Page)**: Grand Hero with emblem, live stats, core pillars, Nazim message, academic programs, and announcement ticker.
-- **تعارف و تاریخ (About Us)**: Institutional background and vision.
-- **شعبہ جات و کورسز (Departments)**: Comprehensive Islamic and contemporary education streams (Hifz, Dars-e-Nizami, Tajweed, Ifta).
-- **داخلہ کی معلومات (Admissions)**: Admission guidelines, requirements, and schedule.
-- **رابطہ و مقام (Contact Us)**: Working inquiry form, telephone/WhatsApp helpline, and location in Mardan.
-- **RTL & Urdu Typography**: Google Fonts (`Noto Nastaliq Urdu`, `Amiri`, `Plus Jakarta Sans`).
+- **فرنٹ اینڈ:** React.js (Vite)
+- **بیک اینڈ:** Node.js + Express.js + JWT + Multer
+- **ڈیٹا بیس:** MongoDB (Mongoose)
+- **ڈیزائن:** Vanilla CSS (US Government style)
+- **زبان:** اردو (RTL)
 
 ---
 
-## 🚀 Getting Started
+## چلانے کا طریقہ (How to Run)
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm / yarn
-
-### Installation
+### 1. فرنٹ اینڈ (Frontend)
 ```bash
-# Clone the repository
-git clone https://github.com/Asif-Iqbal-kha/darul-ulum-isalmia-mardan.git
-
-# Navigate to project directory
-cd "madrassa darululum islamia mardan"
-
-# Install dependencies
+cd client
 npm install
-
-# Start local development server
 npm run dev
 ```
-
-### Production Build
-```bash
-npm run build
-```
+فرنٹ اینڈ **`http://localhost:3000`** پر چلے گا۔
 
 ---
 
-## 🎨 Tech Stack
-- **Frontend**: React 18, React Router 6, Vite
-- **Icons**: Lucide React
-- **Design & Styling**: Custom Vanilla CSS Design System with RTL support
+### 2. ڈیٹا بیس اور بیک اینڈ (Database & Backend)
+
+MongoDB آپ کے سسٹم میں انسٹال ہو چکا ہے (`C:\Program Files\MongoDB\Server\8.3\bin\mongod.exe`)۔
+
+#### طریقہ الف — شارٹ کٹ اسکرپٹس (Direct Click):
+1. **ڈیٹا بیس چلائیں:** `server/start-mongo.bat` پر ڈبل کلک کریں۔
+2. **ڈیٹا سیڈ کریں:** `server/seed-db.bat` پر ڈبل کلک کریں (صرف پہلی بار ڈیٹا بھرنے کے لیے)۔
+3. **بیک اینڈ سرور چلائیں:** `server/start-server.bat` پر ڈبل کلک کریں۔
+
+#### طریقہ ب — ٹرمینل سے (Terminal):
+```bash
+# 1. Start MongoDB
+"C:\Program Files\MongoDB\Server\8.3\bin\mongod.exe" --dbpath "server/data/db" --port 27017
+
+# 2. Seed initial data (first time)
+cd server
+npm run seed
+
+# 3. Start Backend API server
+npm start
+```
+بیک اینڈ **`http://localhost:5000`** پر چلے گا۔
+
+---
+
+## ٹیسٹ لاگ ان معلومات
+
+| کردار | صارف نام | پاسورڈ |
+|-------|----------|--------|
+| ایڈمن | admin | admin123 |
+| استاذ | teacher | teacher123 |
+| طالب علم | student | student123 |

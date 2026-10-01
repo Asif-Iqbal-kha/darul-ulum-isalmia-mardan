@@ -1,0 +1,147 @@
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { FiArrowRight, FiHome } from 'react-icons/fi';
+import SEOHead from '../../components/common/SEOHead';
+import './PublicPages.css';
+
+export default function LoginPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { login, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect if already logged in (ignore/logout student role)
+  if (user) {
+    if (user.role === 'student') {
+      logout();
+    } else {
+      const paths = {
+        master_admin: '/admin/dashboard',
+        teacher: '/teacher/dashboard',
+      };
+      navigate(paths[user.role] || '/');
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!username.trim() || !password.trim()) {
+      setError('صارف نام اور پاسورڈ درج کریں');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await login(username.trim(), password.trim());
+      if (result.success) {
+        if (result.user?.role === 'student' || result.role === 'student') {
+          logout();
+          setError('طلباء کے لیے لاگ ان پورٹل دستیاب نہیں ہے');
+          return;
+        }
+        if (result.user?.role === 'master_admin') {
+          navigate('/admin/dashboard');
+        } else if (result.user?.role === 'teacher') {
+          navigate('/teacher/dashboard');
+        } else {
+          navigate('/');
+        }
+      } else {
+        setError(result.message || 'غلط صارف نام یا پاسورڈ');
+      }
+    } catch (err) {
+      setError('لاگ ان میں خرابی پیش آگئی');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="login-page">
+      <SEOHead
+        titleEn="Portal Login"
+        titleUr="پورٹل لاگ ان"
+        descEn="Staff and Administration Login Portal - Jamia Darul Uloom Islamia Mardan."
+        descUr="انتظامیہ اور اساتذہ کا لاگ ان پورٹل"
+        path="/login"
+        noindex={true}
+      />
+      <div className="login-container">
+        <Link to="/" className="login-return-btn" title="مین ویب سائٹ پر واپس جائیں">
+          <FiArrowRight size={18} />
+          <span>مین ویب سائٹ پر واپس جائیں</span>
+        </Link>
+
+        <div className="login-card">
+          <div className="login-header">
+            <div className="login-logo-wrapper">
+              <img src="/logo.png" alt="لوگو جامعہ دارالعلوم اسلامیہ مردان" className="login-logo-img" />
+            </div>
+            <h2>جامعہ دارالعلوم اسلامیہ مردان</h2>
+            <p>پورٹل لاگ ان</p>
+          </div>
+
+          <div className="login-body">
+            {error && <div className="login-error">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className="form-label">صارف نام</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="صارف نام درج کریں"
+                  autoComplete="username"
+                  style={{ direction: 'ltr', textAlign: 'right' }}
+                  disabled={loading}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">پاسورڈ</label>
+                <input
+                  type="password"
+                  className="form-input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="پاسورڈ درج کریں"
+                  autoComplete="current-password"
+                  style={{ direction: 'ltr', textAlign: 'right' }}
+                  disabled={loading}
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary login-submit" disabled={loading}>
+                {loading ? 'لاگ ان ہو رہا ہے...' : 'لاگ ان'}
+              </button>
+            </form>
+
+            <div className="login-test-info">
+              <h4>محفوظ دفتری پورٹل</h4>
+              <p style={{ margin: '4px 0', fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
+                یہ پورٹل صرف مدرسہ کے مجاز ایڈمن اور اساتذہ کے دفتری و تدریسی امور کے لیے مخصوص ہے۔
+              </p>
+              <p style={{ color: 'var(--color-error)', marginTop: '6px', fontWeight: 600, fontSize: '0.82rem' }}>
+                * طلباء کے لیے کوئی لاگ ان پورٹل موجود نہیں ہے
+              </p>
+            </div>
+
+            <div className="login-footer-return">
+              <Link to="/" className="login-footer-link">
+                <FiHome size={16} />
+                <span>مرکزی ویب سائٹ (ہوم پیج)</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

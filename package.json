@@ -1,21 +1,26 @@
 {
-  "name": "madrassa-darululum-islamia-mardan",
-  "private": true,
+  "name": "madrassa-fullstack",
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
+  "description": "Fullstack Madrassa Management System with React + Express + MongoDB Atlas",
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node build.js",
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "npm run dev --prefix client",
+    "seed": "node server/seed.js",
+    "update-credentials": "node server/scripts/updateCredentials.js"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2",
-    "lucide-react": "^0.441.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.2"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "multer": "^1.4.5-lts.1"
   }
 }
