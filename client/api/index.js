@@ -7,8 +7,8 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
-// Atlas cloud connection string fallback
-const ATLAS_FALLBACK_URI = 'mongodb+srv://asifyousafzai049_db_user:QfQ9F7puLSWm7vUq@cluster0.cp28fzk.mongodb.net/madrassa_db?retryWrites=true&w=majority';
+// IMPORTANT: Set MONGO_URI in your environment variables or Vercel dashboard.
+// Never hardcode credentials in source code.
 
 // Use public DNS for Atlas SRV resolution
 try {
@@ -42,7 +42,10 @@ async function connectToDatabase() {
     return;
   }
 
-  const uri = process.env.MONGO_URI || ATLAS_FALLBACK_URI;
+  const uri = process.env.MONGO_URI;
+  if (!uri) {
+    throw new Error('MONGO_URI environment variable is not set. Configure it in your Vercel project settings.');
+  }
   const isAtlas = uri.includes('mongodb+srv://') || uri.includes('mongodb.net');
 
   try {
