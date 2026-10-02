@@ -22,6 +22,7 @@ import GalleryPage from './pages/public/GalleryPage';
 import ContactPage from './pages/public/ContactPage';
 import LoginPage from './pages/public/LoginPage';
 import FitwatPage from './pages/fitwat/FitwatPage';
+import MuhtamimMessagePage from './pages/public/MuhtamimMessagePage';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -65,6 +66,9 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/muhtamim-message" element={<MuhtamimMessagePage />} />
+            <Route path="/message" element={<Navigate to="/muhtamim-message" replace />} />
+            <Route path="/muhtamim" element={<Navigate to="/muhtamim-message" replace />} />
             <Route path="/admission" element={<AdmissionPage />} />
             <Route path="/donation" element={<DonationPage />} />
             <Route path="/track" element={<TrackingPage />} />

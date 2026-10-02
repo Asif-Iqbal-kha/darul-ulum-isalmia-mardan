@@ -24,6 +24,7 @@ export default function Footer() {
               <h4 className="footer-heading">فوری روابط</h4>
               <ul className="footer-links">
                 <li><Link to="/about">تعارف و مقاصد</Link></li>
+                <li><Link to="/muhtamim-message">پیغامِ مہتمم</Link></li>
                 <li><Link to="/admission">داخلہ</Link></li>
                 <li><Link to="/exams">امتحانات</Link></li>
                 <li><Link to="/news">اعلانات</Link></li>

@@ -17,6 +17,7 @@ export default function Header() {
   const navLinks = [
     { path: '/', label: 'صفحہ اول' },
     { path: '/about', label: 'تعارف' },
+    { path: '/muhtamim-message', label: 'پیغامِ مہتمم' },
     { path: '/admission', label: 'داخلہ' },
     { path: '/donation', label: 'عطیات' },
     { path: '/exams', label: 'امتحانات' },

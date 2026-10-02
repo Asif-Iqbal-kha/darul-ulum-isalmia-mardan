@@ -160,6 +160,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Message from the Muhtamim Spotlight Section */}
+      <section className="home-muhtamim-section">
+        <div className="container">
+          <div className="home-muhtamim-container">
+            <div className="home-muhtamim-photo-box">
+              <div className="home-muhtamim-photo-frame">
+                <img
+                  src="/molana-tahir.jpg"
+                  alt="حضرت مولانا طاہر صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/logo.png';
+                  }}
+                />
+              </div>
+              <div style={{ color: '#bae6fd', fontSize: '1.05rem', fontWeight: 700, marginTop: '8px' }}>
+                حضرت مولانا طاہر صاحب
+              </div>
+              <div style={{ color: 'var(--color-accent-light)', fontSize: '0.88rem' }}>
+                مہتمم و سرپرستِ اعلیٰ
+              </div>
+            </div>
+
+            <div className="home-muhtamim-content">
+              <div className="home-muhtamim-badge">
+                <FiAward size={15} />
+                <span>پیغامِ مہتمم و سرپرستِ اعلیٰ</span>
+              </div>
+              <h2 className="home-muhtamim-title">
+                تعلیم، تزکیہ اور اخلاق کا روشن سفر
+              </h2>
+              <h3 className="home-muhtamim-subtitle">
+                جامعہ دارالعلوم اسلامیہ مردان — خادمِ علومِ نبوت حضرت مولانا طاہر صاحب (حفظہ اللہ ورعاہ)
+              </h3>
+              <p className="home-muhtamim-excerpt">
+                ”جامعہ دارالعلوم اسلامیہ مردان کا مقصود صرف کتابی تعلیم دینا نہیں، بلکہ قرآن و سنت کی روشنی میں نئی نسل کے اخلاق، کردار اور باطن کو سنوارنا ہے۔ ہم اپنے طلبہ کو عصرِ حاضر کے تقاضوں سے ہم آہنگ رہتے ہوئے دینِ متین کی مخلصانہ خدمت اور امت کے لیے مشعلِ راہ بننے کی ترغیب دیتے ہیں۔“
+              </p>
+              <div className="home-muhtamim-actions">
+                <Link to="/muhtamim-message" className="btn btn-accent btn-lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <span>مکمل پیغامِ مہتمم پڑھیں</span>
+                  <FiArrowLeft size={18} />
+                </Link>
+                <Link to="/about" className="btn btn-outline btn-lg hero-btn-outline">
+                  جامعہ کے مقاصد و نصاب
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Objectives Section */}
       <section className="section" style={{ backgroundColor: '#ffffff' }}>
         <div className="container">
