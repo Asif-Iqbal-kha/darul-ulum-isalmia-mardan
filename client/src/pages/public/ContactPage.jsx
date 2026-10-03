@@ -8,8 +8,8 @@ export default function ContactPage() {
       <SEOHead
         titleEn="Contact Us & Location (Google Maps)"
         titleUr="رابطہ و پتہ"
-        descEn="Contact Jamia Darul Uloom Islamia Mardan. Phone: 0315 3044992. Address: Siddiq Akbar Colony, Charsadda Road, Mardan, KPK, Pakistan."
-        descUr="جامعہ دارالعلوم اسلامیہ مردان سے رابطہ کریں۔ فون و واٹس ایپ: 03153044992۔ پتہ: دارالعلوم اسلامیہ مردان، چارسدہ روڈ مردان۔"
+        descEn="Contact Jamia Darul Uloom Islamia Mardan. Phone: 0315 3044992. Address: Charbanda, near Katlang Road & Ring Road, Mardan, KPK, Pakistan."
+        descUr="جامعہ دارالعلوم اسلامیہ مردان سے رابطہ کریں۔ فون و واٹس ایپ: 03153044992۔ پتہ: کاٹلنگ روڈ کے قریب، نزد رنگ روڈ، چار بانڈہ، مردان۔"
         path="/contact"
       />
       <div className="page-header">
@@ -26,9 +26,11 @@ export default function ContactPage() {
               <h3>دفتر مدرسہ</h3>
               <p>
                 <strong>پتہ: </strong>
+                کاٹلنگ روڈ کے قریب، نزد رنگ روڈ، چار بانڈہ، مردان، خیبرپختونخوا (
                 <a href="https://maps.app.goo.gl/VNxyjrHUKwRC9v2U7" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary-dark)', textDecoration: 'underline' }}>
-                  مردان، خیبرپختونخوا، پاکستان (گوگل میپ پر دیکھیں)
+                  گوگل میپ پر لوکیشن دیکھیں
                 </a>
+                )
               </p>
               <p><strong>فون / واٹس ایپ: </strong><a href="tel:03153044992"><span dir="ltr" className="ltr-text">0315 3044992</span></a></p>
               <p><strong>ای میل: </strong>info@darululum-islamia.edu.pk</p>
