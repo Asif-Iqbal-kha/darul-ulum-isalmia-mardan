@@ -973,72 +973,30 @@
     display: none !important;
   }
 
-  .student-print-report,
   .print-only-attendance {
     display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
     font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', Arial, sans-serif !important;
     direction: rtl !important;
     color: #000000 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
   /* When printing an individual student profile record, force-hide any batch list attendance or registry reports */
-  body:has(.student-detail-modal-dialog) .student-print-report,
+  .modal-overlay ~ .print-only-attendance,
   body:has(.student-detail-modal-dialog) .print-only-attendance {
     display: none !important;
   }
 
-  .student-print-report table,
-  .print-only-attendance table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    page-break-inside: auto !important;
-    break-inside: auto !important;
-    margin-bottom: 20px !important;
-  }
-
-  .student-print-report tr,
-  .print-only-attendance tr {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  .student-print-report th,
-  .student-print-report td,
-  .print-only-attendance th,
-  .print-only-attendance td {
-    border: 1px solid #000000 !important;
-    padding: 6px 8px !important;
-    color: #000000 !important;
-  }
-
-  .student-print-report thead tr,
   .print-only-attendance thead tr {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  .student-print-report thead th,
   .print-only-attendance thead th {
     color: #ffffff !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-}
-
-/* Screen Mode: Always hide print reports on regular screen display */
-@media screen {
-  .student-print-report,
-  .print-only-attendance {
-    display: none !important;
   }
 }
 
