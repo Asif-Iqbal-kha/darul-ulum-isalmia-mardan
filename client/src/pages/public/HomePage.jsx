@@ -168,7 +168,7 @@ export default function HomePage() {
               <div className="home-muhtamim-photo-frame">
                 <img
                   src="/molana-tahir.jpg"
-                  alt="حضرت مولانا طاہر صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
+                  alt="حضرت مولانا محمد حقانی راشد صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/logo.png';
@@ -176,7 +176,7 @@ export default function HomePage() {
                 />
               </div>
               <div style={{ color: '#bae6fd', fontSize: '1.05rem', fontWeight: 700, marginTop: '8px' }}>
-                حضرت مولانا طاہر صاحب
+                حضرت مولانا محمد حقانی راشد صاحب
               </div>
               <div style={{ color: 'var(--color-accent-light)', fontSize: '0.88rem' }}>
                 مہتمم و سرپرستِ اعلیٰ
@@ -192,7 +192,7 @@ export default function HomePage() {
                 تعلیم، تزکیہ اور اخلاق کا روشن سفر
               </h2>
               <h3 className="home-muhtamim-subtitle">
-                جامعہ دارالعلوم اسلامیہ مردان — خادمِ علومِ نبوت حضرت مولانا طاہر صاحب (حفظہ اللہ ورعاہ)
+                جامعہ دارالعلوم اسلامیہ مردان — خادمِ علومِ نبوت حضرت مولانا محمد حقانی راشد صاحب (حفظہ اللہ ورعاہ)
               </h3>
               <p className="home-muhtamim-excerpt">
                 ”جامعہ دارالعلوم اسلامیہ مردان کا مقصود صرف کتابی تعلیم دینا نہیں، بلکہ قرآن و سنت کی روشنی میں نئی نسل کے اخلاق، کردار اور باطن کو سنوارنا ہے۔ ہم اپنے طلبہ کو عصرِ حاضر کے تقاضوں سے ہم آہنگ رہتے ہوئے دینِ متین کی مخلصانہ خدمت اور امت کے لیے مشعلِ راہ بننے کی ترغیب دیتے ہیں۔“

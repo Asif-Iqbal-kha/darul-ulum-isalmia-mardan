@@ -17,10 +17,10 @@ export default function MuhtamimMessagePage() {
   return (
     <div className="muhtamim-page">
       <SEOHead
-        titleEn="Message from the Muhtamim - Maulana Tahir Sahib"
-        titleUr="پیغامِ مہتمم — مولانا طاہر صاحب"
-        descEn="Official message from the Muhtamim (Principal) of Jamia Darul Uloom Islamia Mardan, Maulana Tahir Sahib. Vision, educational philosophy and guidance for students and parents."
-        descUr="جامعہ دارالعلوم اسلامیہ مردان کے مہتمم و سرپرست حضرت مولانا طاہر صاحب کا خصوصی پیغام، تعلیمی وژن، طلبہ اور والدین کے نام ہدایات اور جامعہ کے مقاصد۔"
+        titleEn="Message from the Muhtamim - Maulana Muhammad Haqqani Rashid Sahib"
+        titleUr="پیغامِ مہتمم — مولانا محمد حقانی راشد صاحب"
+        descEn="Official message from the Muhtamim (Principal) of Jamia Darul Uloom Islamia Mardan, Maulana Muhammad Haqqani Rashid Sahib. Vision, educational philosophy and guidance for students and parents."
+        descUr="جامعہ دارالعلوم اسلامیہ مردان کے مہتمم و سرپرست حضرت مولانا محمد حقانی راشد صاحب کا خصوصی پیغام، تعلیمی وژن، طلبہ اور والدین کے نام ہدایات اور جامعہ کے مقاصد۔"
         path="/muhtamim-message"
       />
 
@@ -36,7 +36,7 @@ export default function MuhtamimMessagePage() {
           </div>
           <h1 className="muhtamim-header-title">پیغامِ مہتمم و سرپرستِ اعلیٰ</h1>
           <p className="muhtamim-header-subtitle">
-            جامعہ دارالعلوم اسلامیہ مردان — خادمِ علومِ نبوت حضرت مولانا طاہر صاحب (حفظہ اللہ ورعاہ)
+            جامعہ دارالعلوم اسلامیہ مردان — خادمِ علومِ نبوت حضرت مولانا محمد حقانی راشد صاحب (حفظہ اللہ ورعاہ)
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function MuhtamimMessagePage() {
                   <div className="muhtamim-gold-border-decor"></div>
                   <img
                     src="/molana-tahir.jpg"
-                    alt="حضرت مولانا طاہر صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
+                    alt="حضرت مولانا محمد حقانی راشد صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
                     className="muhtamim-photo-img"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -72,7 +72,7 @@ export default function MuhtamimMessagePage() {
                   <FiAward size={16} />
                   <span>قیادت و رہنمائی کا پیغام | Official Leadership Address</span>
                 </div>
-                <h2 className="muhtamim-leader-name">حضرت مولانا طاہر صاحب</h2>
+                <h2 className="muhtamim-leader-name">حضرت مولانا محمد حقانی راشد صاحب</h2>
                 <h3 className="muhtamim-leader-designation">
                   مہتمم، بانی و سرپرستِ اعلیٰ — جامعہ دارالعلوم اسلامیہ مردان
                 </h3>
@@ -288,7 +288,7 @@ export default function MuhtamimMessagePage() {
                       e.target.style.display = 'none';
                     }}
                   />
-                  <div className="signatory-name">مولانا طاہر صاحب</div>
+                  <div className="signatory-name">مولانا محمد حقانی راشد صاحب</div>
                   <div className="signatory-role">مہتمم و سرپرستِ اعلیٰ</div>
                   <div className="signatory-inst">جامعہ دارالعلوم اسلامیہ مردان، خیبر پختونخوا</div>
                 </div>

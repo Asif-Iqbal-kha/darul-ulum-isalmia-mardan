@@ -376,13 +376,13 @@ export default function ResultPage() {
                         <div className="sig-img-wrapper">
                           <img
                             src="/muhtamim-signature.png"
-                            alt="دستخط مہتمم حضرت مولانا اسحاق صاحب"
+                            alt="دستخط مہتمم حضرت مولانا محمد حقانی راشد صاحب"
                             className="sig-muhtamim-img"
                           />
                         </div>
                         <div className="sig-line"></div>
                         <span className="sig-title">دستخط مہتمم / صدر مدرس</span>
-                        <span className="sig-name">(حضرت مولانا اسحاق صاحب مدظلہ)</span>
+                        <span className="sig-name">(حضرت مولانا محمد حقانی راشد صاحب مدظلہ)</span>
                       </div>
                     </div>
 
