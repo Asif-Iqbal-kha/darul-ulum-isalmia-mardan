@@ -87,6 +87,50 @@
   color: var(--color-accent-light);
 }
 
+.footer-link-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-on-dark-muted);
+  font-size: 0.875rem;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--transition-fast);
+  text-align: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-link-action-btn:hover {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+}
+
+.footer-rules-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(202, 138, 4, 0.16);
+  border: 1px solid rgba(202, 138, 4, 0.45);
+  color: #fde047;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 4px;
+}
+
+.footer-rules-badge-btn:hover {
+  background: #ca8a04;
+  color: #ffffff;
+  border-color: #ca8a04;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(202, 138, 4, 0.3);
+}
+
 .footer-contact p {
   color: var(--color-text-on-dark-muted);
   font-size: 0.875rem;

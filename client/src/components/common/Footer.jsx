@@ -1,94 +1,124 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
+import { FiShield, FiFileText } from 'react-icons/fi';
+import RulesModal from './RulesModal';
 import './Footer.css';
 
 export default function Footer() {
+  const [showRulesModal, setShowRulesModal] = useState(false);
+
   return (
-    <footer className="site-footer">
-      <div className="footer-main">
-        <div className="container">
-          <div className="footer-grid">
-            {/* About */}
-            <div className="footer-col">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                <img src="/logo.png" alt="جامعہ دارالعلوم اسلامیہ مردان" style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#fff', padding: '2px', border: '1px solid var(--color-accent)' }} />
-                <h4 className="footer-heading" style={{ margin: 0, paddingBottom: '4px' }}>جامعہ دارالعلوم اسلامیہ مردان</h4>
+    <>
+      <footer className="site-footer">
+        <div className="footer-main">
+          <div className="container">
+            <div className="footer-grid">
+              {/* About */}
+              <div className="footer-col">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                  <img src="/logo.png" alt="جامعہ دارالعلوم اسلامیہ مردان" style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#fff', padding: '2px', border: '1px solid var(--color-accent)' }} />
+                  <h4 className="footer-heading" style={{ margin: 0, paddingBottom: '4px' }}>جامعہ دارالعلوم اسلامیہ مردان</h4>
+                </div>
+                <p className="footer-text">
+                  العلم نور — مردان، خیبرپختونخوا پاکستان میں واقع ایک عظیم دینی تعلیمی ادارہ جو ناظرہ، حفظ القرآن اور درسِ نظامی کی اعلیٰ و معیاری تعلیم فراہم کرتا ہے۔
+                </p>
               </div>
-              <p className="footer-text">
-                العلم نور — مردان، خیبرپختونخوا پاکستان میں واقع ایک عظیم دینی تعلیمی ادارہ جو ناظرہ، حفظ القرآن اور درسِ نظامی کی اعلیٰ و معیاری تعلیم فراہم کرتا ہے۔
-              </p>
-            </div>
 
-            {/* Quick Links */}
-            <div className="footer-col">
-              <h4 className="footer-heading">فوری روابط</h4>
-              <ul className="footer-links">
-                <li><Link to="/about">تعارف و مقاصد</Link></li>
-                <li><Link to="/muhtamim-message">پیغامِ مہتمم</Link></li>
-                <li><Link to="/admission">داخلہ</Link></li>
-                <li><Link to="/exams">امتحانات</Link></li>
-                <li><Link to="/news">اعلانات</Link></li>
-                <li><Link to="/gallery">تصاویر</Link></li>
-              </ul>
-            </div>
+              {/* Quick Links */}
+              <div className="footer-col">
+                <h4 className="footer-heading">فوری روابط</h4>
+                <ul className="footer-links">
+                  <li><Link to="/about">تعارف و مقاصد</Link></li>
+                  <li><Link to="/muhtamim-message">پیغامِ مہتمم</Link></li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => setShowRulesModal(true)}
+                      className="footer-link-action-btn"
+                    >
+                      <FiShield size={14} style={{ color: 'var(--color-accent-light)' }} />
+                      <span>آئین و قواعد و ضوابط</span>
+                    </button>
+                  </li>
+                  <li><Link to="/admission">داخلہ</Link></li>
+                  <li><Link to="/exams">امتحانات</Link></li>
+                  <li><Link to="/news">اعلانات</Link></li>
+                  <li><Link to="/gallery">تصاویر</Link></li>
+                </ul>
+              </div>
 
-            {/* Portal Links */}
-            <div className="footer-col">
-              <h4 className="footer-heading">پورٹل</h4>
-              <ul className="footer-links">
-                <li><Link to="/login">لاگ ان</Link></li>
-                <li><Link to="/contact">رابطہ</Link></li>
-              </ul>
-            </div>
+              {/* Portal Links */}
+              <div className="footer-col">
+                <h4 className="footer-heading">پورٹل</h4>
+                <ul className="footer-links">
+                  <li><Link to="/login">لاگ ان</Link></li>
+                  <li><Link to="/contact">رابطہ</Link></li>
+                </ul>
+              </div>
 
-            {/* Contact */}
-            <div className="footer-col">
-              <h4 className="footer-heading">رابطہ معلومات</h4>
-              <div className="footer-contact">
-                <p>
-                  <a href="https://maps.app.goo.gl/VNxyjrHUKwRC9v2U7" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
-                    مردان، خیبرپختونخوا، پاکستان (گوگل میپ)
-                  </a>
-                </p>
-                <p>فون / رابطہ: <a href="tel:03153044992" style={{ color: 'inherit' }}><span dir="ltr" className="ltr-text">0315 3044992</span></a></p>
-                <p>ای میل: info@darululum-islamia.edu.pk</p>
-                <p>
-                  <a
-                    href="https://www.facebook.com/share/14ormTsCHwV/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'inherit', marginTop: '2px' }}
-                  >
-                    <FaFacebook size={16} style={{ color: '#1877F2' }} />
-                    <span>فیس بک: آفیشل پیج</span>
-                  </a>
-                </p>
+              {/* Contact */}
+              <div className="footer-col">
+                <h4 className="footer-heading">رابطہ معلومات</h4>
+                <div className="footer-contact">
+                  <p>
+                    <a href="https://maps.app.goo.gl/VNxyjrHUKwRC9v2U7" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                      مردان، خیبرپختونخوا، پاکستان (گوگل میپ)
+                    </a>
+                  </p>
+                  <p>فون / رابطہ: <a href="tel:03153044992" style={{ color: 'inherit' }}><span dir="ltr" className="ltr-text">0315 3044992</span></a></p>
+                  <p>ای میل: info@darululum-islamia.edu.pk</p>
+                  <p>
+                    <a
+                      href="https://www.facebook.com/share/14ormTsCHwV/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'inherit', marginTop: '2px' }}
+                    >
+                      <FaFacebook size={16} style={{ color: '#1877F2' }} />
+                      <span>فیس بک: آفیشل پیج</span>
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="footer-bottom">
-        <div className="container footer-bottom-inner">
-          <p>جملہ حقوق محفوظ ہیں &copy; {new Date().getFullYear()} جامعہ دارالعلوم اسلامیہ مردان</p>
-          <div className="footer-credits" dir="ltr">
-            <span>Developed by <strong className="credit-highlight">Engr Asif Iqbal</strong></span>
-            <span className="footer-credits-dot">•</span>
-            <span>
-              Co-Developed by AI Engr{' '}
-              <a
-                href="https://www.facebook.com/shoaibkhattak911/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-credits-link"
-              >
-                Shoaib Ali
-              </a>
-            </span>
+        <div className="footer-bottom">
+          <div className="container footer-bottom-inner">
+            <p>جملہ حقوق محفوظ ہیں &copy; {new Date().getFullYear()} جامعہ دارالعلوم اسلامیہ مردان</p>
+
+            <button
+              type="button"
+              onClick={() => setShowRulesModal(true)}
+              className="footer-rules-badge-btn"
+            >
+              <FiFileText size={14} />
+              <span>دستور العمل، آئین و قواعد و ضوابط ملاحظہ فرمائیں</span>
+            </button>
+
+            <div className="footer-credits" dir="ltr">
+              <span>Developed by <strong className="credit-highlight">Engr Asif Iqbal</strong></span>
+              <span className="footer-credits-dot">•</span>
+              <span>
+                Co-Developed by AI Engr{' '}
+                <a
+                  href="https://www.facebook.com/shoaibkhattak911/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-credits-link"
+                >
+                  Shoaib Ali
+                </a>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      {/* Official Aaeen & Rules Regulations Popup Modal */}
+      <RulesModal isOpen={showRulesModal} onClose={() => setShowRulesModal(false)} />
+    </>
   );
 }
