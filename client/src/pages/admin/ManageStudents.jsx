@@ -74,15 +74,6 @@ export default function ManageStudents() {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
 
-  // Auto-reset printReportType after print preview dialog closes
-  useEffect(() => {
-    const handleAfterPrint = () => {
-      setPrintReportType('all');
-    };
-    window.addEventListener('afterprint', handleAfterPrint);
-    return () => window.removeEventListener('afterprint', handleAfterPrint);
-  }, []);
-
   const loadData = async () => {
     setLoading(true);
     try {
@@ -115,54 +106,64 @@ export default function ManageStudents() {
     ? activeStudents
     : activeStudents.filter((s) => (s.className || s.class?.name || s.class) === classFilter);
 
-  const filtered = students.filter((s) => {
-    const sClass = s.className || s.class?.name || s.class;
-    const matchesSearch =
-      (s.name || '').includes(search) ||
-      (s.fatherName || '').includes(search) ||
-      (s.rollNumber || '').includes(search) ||
-      (s.cnic || '').includes(search) ||
-      (s.phone || '').includes(search);
-    const matchesClass = classFilter === 'all' || sClass === classFilter;
+  const graduatedStudentsToPrint = classFilter === 'all'
+    ? graduatedStudents
+    : graduatedStudents.filter((s) => (s.className || s.class?.name || s.class) === classFilter);
 
-    let matchesTab = true;
-    if (statusTab === 'active') {
-      matchesTab = s.status === 'active' || (!s.status && s.status !== 'inactive' && s.status !== 'graduated' && s.status !== 'kharij');
-    } else if (statusTab === 'graduated') {
-      matchesTab = s.status === 'graduated';
-    } else if (statusTab === 'kharij') {
-      matchesTab = s.status === 'kharij';
-    }
+  const kharijStudentsToPrint = classFilter === 'all'
+    ? kharijStudents
+    : kharijStudents.filter((s) => (s.className || s.class?.name || s.class) === classFilter);
 
-    return matchesSearch && matchesClass && matchesTab;
-  });
+  const allStudentsToPrint = classFilter === 'all'
+    ? students
+    : students.filter((s) => (s.className || s.class?.name || s.class) === classFilter);
+
+  // Determine which report to show when printing:
+  const effectivePrintReport = (printReportType && printReportType !== 'all')
+    ? printReportType
+    : (statusTab === 'graduated'
+        ? 'graduates_list'
+        : statusTab === 'kharij'
+          ? 'kharij_list'
+          : statusTab === 'present'
+            ? 'present_list'
+            : statusTab === 'active'
+              ? 'active_list'
+              : 'all_list');
 
   const handlePrintPresentList = () => {
     setPrintReportType('present_list');
     setTimeout(() => {
       window.print();
-    }, 150);
+    }, 200);
   };
 
   const handlePrintGraduatesList = () => {
     setPrintReportType('graduates_list');
     setTimeout(() => {
       window.print();
-    }, 150);
+    }, 200);
   };
 
   const handlePrintKharijList = () => {
     setPrintReportType('kharij_list');
     setTimeout(() => {
       window.print();
-    }, 150);
+    }, 200);
   };
 
   const handlePrintActiveStudentsList = () => {
     setPrintReportType('active_list');
     setTimeout(() => {
       window.print();
-    }, 150);
+    }, 200);
+  };
+
+  const handlePrintAllStudentsList = () => {
+    setPrintReportType('all_list');
+    setTimeout(() => {
+      window.print();
+    }, 200);
   };
 
 
@@ -354,9 +355,23 @@ export default function ManageStudents() {
       <div className="page-title-bar no-print">
         <h2 className="page-title" style={{ border: 'none', margin: 0, padding: 0 }}>طلباء کا انتظام (ریکارڈ و کوائف)</h2>
         <div style={{ display: 'flex', gap: '8px' }}>
-          <button className="btn btn-outline btn-sm" onClick={handlePrintActiveStudentsList} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <FiPrinter size={14} /> زیرِ تعلیم طلباء رپورٹ PDF
-          </button>
+          {statusTab === 'graduated' ? (
+            <button className="btn btn-outline btn-sm" onClick={handlePrintGraduatesList} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <FiPrinter size={14} /> تمام فارغین رپورٹ PDF
+            </button>
+          ) : statusTab === 'kharij' ? (
+            <button className="btn btn-outline btn-sm" onClick={handlePrintKharijList} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <FiPrinter size={14} /> خارج کردہ طلباء رپورٹ PDF
+            </button>
+          ) : statusTab === 'present' ? (
+            <button className="btn btn-outline btn-sm" onClick={handlePrintPresentList} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <FiPrinter size={14} /> حاضر طلباء رپورٹ PDF
+            </button>
+          ) : (
+            <button className="btn btn-outline btn-sm" onClick={handlePrintActiveStudentsList} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <FiPrinter size={14} /> زیرِ تعلیم طلباء رپورٹ PDF
+            </button>
+          )}
           <Link to="/admin/promote" className="btn btn-outline btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <FiTrendingUp size={14} /> طلباء کو ترقی دیں
           </Link>
@@ -377,19 +392,19 @@ export default function ManageStudents() {
       }}>
         <button
           className={`btn btn-sm ${statusTab === 'all' ? 'btn-primary' : 'btn-outline'}`}
-          onClick={() => setStatusTab('all')}
+          onClick={() => { setStatusTab('all'); setPrintReportType('all_list'); }}
         >
           تمام طلباء ({students.length})
         </button>
         <button
           className={`btn btn-sm ${statusTab === 'active' ? 'btn-primary' : 'btn-outline'}`}
-          onClick={() => setStatusTab('active')}
+          onClick={() => { setStatusTab('active'); setPrintReportType('active_list'); }}
         >
           فعال / زیرِ تعلیم ({activeStudents.length})
         </button>
         <button
           className={`btn btn-sm ${statusTab === 'present' ? 'btn-primary' : 'btn-outline'}`}
-          onClick={() => setStatusTab('present')}
+          onClick={() => { setStatusTab('present'); setPrintReportType('present_list'); }}
           style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
         >
           <span>آج کے حاضر طلباء ({todayPresentData.totalPresent})</span>
@@ -397,35 +412,35 @@ export default function ManageStudents() {
         </button>
         <button
           className={`btn btn-sm ${statusTab === 'graduated' ? 'btn-primary' : 'btn-outline'}`}
-          onClick={() => setStatusTab('graduated')}
+          onClick={() => { setStatusTab('graduated'); setPrintReportType('graduates_list'); }}
         >
           🎓 فارغ التحصیل طلباء ({graduatedStudents.length})
         </button>
         <button
           className={`btn btn-sm ${statusTab === 'kharij' ? 'btn-primary' : 'btn-outline'}`}
-          onClick={() => setStatusTab('kharij')}
+          onClick={() => { setStatusTab('kharij'); setPrintReportType('kharij_list'); }}
         >
           🚫 خارج کردہ طلباء ({kharijStudents.length})
         </button>
 
         {/* Quick Report Print Buttons */}
         <div style={{ marginRight: 'auto', display: 'flex', gap: '8px' }}>
-          {(statusTab === 'active' || statusTab === 'all') && activeStudents.length > 0 && (
+          {(statusTab === 'active' || statusTab === 'all') && (
             <button className="btn btn-outline btn-sm" onClick={handlePrintActiveStudentsList}>
               <FiPrinter size={15} style={{ marginLeft: '4px' }} /> زیرِ تعلیم طلباء رپورٹ PDF
             </button>
           )}
-          {statusTab === 'present' && todayPresentData.totalPresent > 0 && (
+          {statusTab === 'present' && (
             <button className="btn btn-outline btn-sm" onClick={handlePrintPresentList}>
               <FiPrinter size={15} style={{ marginLeft: '4px' }} /> حاضر طلباء رپورٹ PDF
             </button>
           )}
-          {statusTab === 'graduated' && graduatedStudents.length > 0 && (
+          {statusTab === 'graduated' && (
             <button className="btn btn-outline btn-sm" onClick={handlePrintGraduatesList}>
               <FiPrinter size={15} style={{ marginLeft: '4px' }} /> تمام فارغین رپورٹ PDF
             </button>
           )}
-          {statusTab === 'kharij' && kharijStudents.length > 0 && (
+          {statusTab === 'kharij' && (
             <button className="btn btn-outline btn-sm" onClick={handlePrintKharijList}>
               <FiPrinter size={15} style={{ marginLeft: '4px' }} /> خارج کردہ طلباء رپورٹ PDF
             </button>
@@ -1501,47 +1516,245 @@ export default function ManageStudents() {
           </div>
         </div>
       )}
-      {/* PRINT-ONLY: CURRENTLY PRESENT STUDENTS REPORT */}
-      {printReportType === 'present_list' && !selectedStudent && (
-        <div className="print-only-attendance" style={{ display: 'none' }}>
-          <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.4rem' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
-            <p style={{ margin: '0 0 4px', fontSize: '0.9rem' }}>مردان، خیبرپختونخوا، پاکستان</p>
-            <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', textDecoration: 'underline' }}>
-              حاضر طلباء کی یومیہ دفتری رپورٹ (Currently Present Students Report)
-            </h3>
+      {/* ========================================================================= */}
+      {/* PRINT-ONLY OFFICIAL REPORTS (Graduated, Struck-Off, Active, Present, All)  */}
+      {/* Automatically rendered when printing or when corresponding print btn is clicked */}
+      {/* ========================================================================= */}
+
+      {/* 1. GRADUATED STUDENTS REPORT */}
+      {!selectedStudent && effectivePrintReport === 'graduates_list' && (
+        <div className="student-print-report print-only-attendance">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
+            <img src="/logo.png" alt="دارالعلوم لوگو" style={{ maxHeight: '65px', maxWidth: '65px', objectFit: 'contain' }} />
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <h2 style={{ margin: '0 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#000' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
+              <p style={{ margin: '0 0 4px', fontSize: '0.85rem', color: '#333', fontWeight: 600 }}>گلشن حقانیہ، رنگ روڈ، مردان، خیبرپختونخوا</p>
+              <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: '#444' }}>
+                رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس العربیہ پاکستان: 32373 (07/07/2026)
+              </p>
+              <h3 style={{ margin: '6px 0 0', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'underline', color: '#000' }}>
+                فارغ التحصیل حفاظ و علماء کرام کا سرکاری رجسٹر (Graduated Students Registry)
+              </h3>
+            </div>
+            <div style={{ textAlign: 'left', minWidth: '95px', fontSize: '0.78rem', color: '#333' }}>
+              تاریخِ پرنٹ: <br />
+              <strong style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>{new Date().toISOString().split('T')[0]}</strong>
+            </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem' }}>
-            <div><strong>تاریخ:</strong> <span style={{ fontFamily: 'monospace' }}>{todayPresentData.date}</span></div>
-            <div><strong>کل حاضر طلباء:</strong> <strong style={{ color: '#15803d' }}>{todayPresentData.totalPresent}</strong></div>
-            <div><strong>پرنٹ کی تاریخ:</strong> {new Date().toISOString().split('T')[0]}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem', fontWeight: 600 }}>
+            <div><strong>کل فارغ التحصیل طلباء:</strong> {graduatedStudentsToPrint.length}</div>
+            <div><strong>درجہ / شعبہ:</strong> {classFilter === 'all' ? 'تمام درجات و شعبہ جات' : classFilter}</div>
           </div>
 
           <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
             <thead>
-              <tr style={{ background: '#060a13', color: '#ffffff', borderBottom: '2px solid #000' }}>
+              <tr style={{ background: '#0f172a', color: '#ffffff', borderBottom: '2px solid #000' }}>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '6%', color: '#ffffff' }}>شمار</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '14%', color: '#ffffff' }}>رول نمبر</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '25%', color: '#ffffff' }}>نام فارغ التحصیل</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '22%', color: '#ffffff' }}>والد کا نام</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '18%', color: '#ffffff' }}>شعبہ / درجہ</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>حالت</th>
+              </tr>
+            </thead>
+            <tbody>
+              {graduatedStudentsToPrint.length === 0 ? (
+                <tr>
+                  <td colSpan="6" style={{ border: '1px solid #000', textAlign: 'center', padding: '24px', color: '#444' }}>
+                    اس درجہ یا فلٹر میں کوئی فارغ التحصیل طالب علم درج نہیں ہے۔
+                  </td>
+                </tr>
+              ) : (
+                graduatedStudentsToPrint.map((s, idx) => (
+                  <tr key={s._id || idx}>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
+                      {s.rollNumber}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
+                      {s.className || s.class?.name || s.class || 'حفظ قرآن کریم'}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#047857' }}>
+                      فارغ التحصیل
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+            <tfoot>
+              <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
+                <td colSpan="6" style={{ border: '1px solid #000', padding: '8px', textAlign: 'center' }}>
+                  مجموعی تعدادِ فارغین: {graduatedStudentsToPrint.length} — اللہ تعالیٰ تمام فارغین کے علم و عمل میں برکت عطا فرمائے — آمین
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '20px' }}>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط ناظمِ امتحانات
+            </div>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط ناظمِ تعلیمات
+            </div>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط مہتممِ جامعہ
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 2. STRUCK-OFF / KHARIJ STUDENTS REPORT */}
+      {!selectedStudent && effectivePrintReport === 'kharij_list' && (
+        <div className="student-print-report print-only-attendance">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
+            <img src="/logo.png" alt="دارالعلوم لوگو" style={{ maxHeight: '65px', maxWidth: '65px', objectFit: 'contain' }} />
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <h2 style={{ margin: '0 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#000' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
+              <p style={{ margin: '0 0 4px', fontSize: '0.85rem', color: '#333', fontWeight: 600 }}>گلشن حقانیہ، رنگ روڈ، مردان، خیبرپختونخوا</p>
+              <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: '#444' }}>
+                رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس العربیہ پاکستان: 32373 (07/07/2026)
+              </p>
+              <h3 style={{ margin: '6px 0 0', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'underline', color: '#7f1d1d' }}>
+                خارج / نکالے گئے طلباء کا دفتری رجسٹر (Struck-Off Students Registry)
+              </h3>
+            </div>
+            <div style={{ textAlign: 'left', minWidth: '95px', fontSize: '0.78rem', color: '#333' }}>
+              تاریخِ پرنٹ: <br />
+              <strong style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>{new Date().toISOString().split('T')[0]}</strong>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem', fontWeight: 600 }}>
+            <div><strong>کل خارج شدہ طلباء:</strong> {kharijStudentsToPrint.length}</div>
+            <div><strong>درجہ / شعبہ:</strong> {classFilter === 'all' ? 'تمام درجات' : classFilter}</div>
+          </div>
+
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+            <thead>
+              <tr style={{ background: '#7f1d1d', color: '#ffffff', borderBottom: '2px solid #000' }}>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '6%', color: '#ffffff' }}>شمار</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '12%', color: '#ffffff' }}>رول نمبر</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>نام طالب علم</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '18%', color: '#ffffff' }}>والد کا نام</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '14%', color: '#ffffff' }}>درجہ</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>ایڈمن نوٹ / وجہ</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '10%', color: '#ffffff' }}>حالت</th>
+              </tr>
+            </thead>
+            <tbody>
+              {kharijStudentsToPrint.length === 0 ? (
+                <tr>
+                  <td colSpan="7" style={{ border: '1px solid #000', textAlign: 'center', padding: '24px', color: '#444' }}>
+                    اس درجہ یا فلٹر میں کوئی خارج کردہ طالب علم درج نہیں ہے۔
+                  </td>
+                </tr>
+              ) : (
+                kharijStudentsToPrint.map((s, idx) => (
+                  <tr key={s._id || idx}>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
+                      {s.rollNumber}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
+                      {s.className || s.class?.name || s.class || '—'}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', fontSize: '0.85rem', color: '#444' }}>
+                      {s.adminNote || 'قواعد و ضوابط کی خلاف ورزی / غیر حاضری'}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#991b1b' }}>
+                      خارج کردہ
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+            <tfoot>
+              <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
+                <td colSpan="7" style={{ border: '1px solid #000', padding: '8px', textAlign: 'center' }}>
+                  مجموعی تعدادِ خارج شدہ طلباء: {kharijStudentsToPrint.length} — اللہ تعالیٰ سب کو نیک عمل کی توفیق عطا فرمائے — آمین
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '20px' }}>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط ناظمِ نظم و ضبط
+            </div>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط ناظمِ تعلیمات
+            </div>
+            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
+              دستخط مہتممِ جامعہ
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 3. CURRENTLY PRESENT STUDENTS REPORT */}
+      {!selectedStudent && effectivePrintReport === 'present_list' && (
+        <div className="student-print-report print-only-attendance">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
+            <img src="/logo.png" alt="دارالعلوم لوگو" style={{ maxHeight: '65px', maxWidth: '65px', objectFit: 'contain' }} />
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <h2 style={{ margin: '0 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#000' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
+              <p style={{ margin: '0 0 4px', fontSize: '0.85rem', color: '#333', fontWeight: 600 }}>گلشن حقانیہ، رنگ روڈ، مردان، خیبرپختونخوا</p>
+              <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: '#444' }}>
+                رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس العربیہ پاکستان: 32373 (07/07/2026)
+              </p>
+              <h3 style={{ margin: '6px 0 0', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'underline', color: '#000' }}>
+                حاضر طلباء کی یومیہ دفتری رپورٹ (Currently Present Students Report)
+              </h3>
+            </div>
+            <div style={{ textAlign: 'left', minWidth: '95px', fontSize: '0.78rem', color: '#333' }}>
+              تاریخِ پرنٹ: <br />
+              <strong style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>{new Date().toISOString().split('T')[0]}</strong>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem', fontWeight: 600 }}>
+            <div><strong>تاریخِ حاضری:</strong> <span style={{ fontFamily: 'monospace' }}>{todayPresentData.date || new Date().toISOString().split('T')[0]}</span></div>
+            <div><strong>کل حاضر طلباء:</strong> <strong style={{ color: '#15803d' }}>{todayPresentData.totalPresent}</strong></div>
+          </div>
+
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+            <thead>
+              <tr style={{ background: '#0f172a', color: '#ffffff', borderBottom: '2px solid #000' }}>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '8%', color: '#ffffff' }}>شمار</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>رول نمبر</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '35%', color: '#ffffff' }}>طالب علم کا نام</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '16%', color: '#ffffff' }}>رول نمبر</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '34%', color: '#ffffff' }}>طالب علم کا نام</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '22%', color: '#ffffff' }}>درجہ</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>کیفیت</th>
               </tr>
             </thead>
             <tbody>
-              {todayPresentData.students.map((ps, idx) => (
-                <tr key={idx}>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
-                    {ps.rollNumber}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{ps.studentName}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{ps.className}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#15803d' }}>
-                    حاضر (Present)
+              {todayPresentData.students.length === 0 ? (
+                <tr>
+                  <td colSpan="5" style={{ border: '1px solid #000', textAlign: 'center', padding: '24px', color: '#444' }}>
+                    اس تاریخ میں کوئی حاضر طالب علم درج نہیں ہے۔
                   </td>
                 </tr>
-              ))}
+              ) : (
+                todayPresentData.students.map((ps, idx) => (
+                  <tr key={idx}>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
+                      {ps.rollNumber}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{ps.studentName}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{ps.className}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#15803d' }}>
+                      حاضر (Present)
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
             <tfoot>
               <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
@@ -1569,202 +1782,83 @@ export default function ManageStudents() {
         </div>
       )}
 
-      {/* PRINT-ONLY: GRADUATED STUDENTS REGISTRY REPORT */}
-      {printReportType === 'graduates_list' && !selectedStudent && (
-        <div className="print-only-attendance" style={{ display: 'none' }}>
-          <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.4rem' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
-            <p style={{ margin: '0 0 4px', fontSize: '0.9rem' }}>مردان، خیبرپختونخوا، پاکستان</p>
-            <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', textDecoration: 'underline' }}>
-              فارغ التحصیل حفاظ و علماء کرام کا رجسٹر (Graduated Students Registry)
-            </h3>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem' }}>
-            <div><strong>کل فارغ التحصیل طلباء:</strong> {graduatedStudents.length}</div>
-            <div><strong>تاریخِ پرنٹ:</strong> {new Date().toISOString().split('T')[0]}</div>
-          </div>
-
-          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
-            <thead>
-              <tr style={{ background: '#000000', color: '#ffffff', borderBottom: '2px solid #000' }}>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '8%', color: '#ffffff' }}>شمار</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>رول نمبر</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '25%', color: '#ffffff' }}>نام فارغ التحصیل</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '22%', color: '#ffffff' }}>والد کا نام</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>شعبہ / درجہ</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>حالت</th>
-              </tr>
-            </thead>
-            <tbody>
-              {graduatedStudents.map((s, idx) => (
-                <tr key={s._id}>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
-                    {s.rollNumber}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
-                    {s.className || s.class?.name || 'حفظ قرآن کریم'}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#0f766e' }}>
-                    فارغ التحصیل
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
-                <td colSpan="6" style={{ border: '1px solid #000', padding: '8px', textAlign: 'center' }}>
-                  اللہ تعالیٰ تمام فارغین کے علم و عمل میں برکت عطا فرمائے — آمین
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '20px' }}>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط ناظمِ امتحانات
+      {/* 4. ACTIVE / ALL ENROLLED STUDENTS REPORT */}
+      {!selectedStudent && (effectivePrintReport === 'active_list' || effectivePrintReport === 'all_list') && (
+        <div className="student-print-report print-only-attendance">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
+            <img src="/logo.png" alt="دارالعلوم لوگو" style={{ maxHeight: '65px', maxWidth: '65px', objectFit: 'contain' }} />
+            <div style={{ textAlign: 'center', flex: 1 }}>
+              <h2 style={{ margin: '0 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#000' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
+              <p style={{ margin: '0 0 4px', fontSize: '0.85rem', color: '#333', fontWeight: 600 }}>گلشن حقانیہ، رنگ روڈ، مردان، خیبرپختونخوا</p>
+              <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: '#444' }}>
+                رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس العربیہ پاکستان: 32373 (07/07/2026)
+              </p>
+              <h3 style={{ margin: '6px 0 0', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'underline', color: '#000' }}>
+                {effectivePrintReport === 'all_list'
+                  ? 'طلباء کا مکمل عمومی دفتری رجسٹر (General Students Master Registry)'
+                  : 'زیرِ تعلیم طلباء کی سرکاری فہرست (Currently Studying Students List)'}
+              </h3>
             </div>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط ناظمِ تعلیمات
-            </div>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط مہتممِ جامعہ
+            <div style={{ textAlign: 'left', minWidth: '95px', fontSize: '0.78rem', color: '#333' }}>
+              تاریخِ پرنٹ: <br />
+              <strong style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>{new Date().toISOString().split('T')[0]}</strong>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* PRINT-ONLY: KHARIJ / STRUCK-OFF STUDENTS REGISTRY REPORT */}
-      {printReportType === 'kharij_list' && !selectedStudent && (
-        <div className="print-only-attendance" style={{ display: 'none' }}>
-          <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.4rem' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
-            <p style={{ margin: '0 0 4px', fontSize: '0.9rem' }}>مردان، خیبرپختونخوا، پاکستان</p>
-            <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', textDecoration: 'underline' }}>
-              خارج / نکالے گئے طلباء کا دفتری رجسٹر (Struck-Off Students Registry)
-            </h3>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem' }}>
-            <div><strong>کل خارج شدہ طلباء:</strong> {kharijStudents.length}</div>
-            <div><strong>تاریخِ پرنٹ:</strong> {new Date().toISOString().split('T')[0]}</div>
-          </div>
-
-          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
-            <thead>
-              <tr style={{ background: '#7f1d1d', color: '#ffffff', borderBottom: '2px solid #000' }}>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '6%', color: '#ffffff' }}>شمار</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '12%', color: '#ffffff' }}>رول نمبر</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>نام طالب علم</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '18%', color: '#ffffff' }}>والد کا نام</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '14%', color: '#ffffff' }}>درجہ</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>ایڈمن نوٹ</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '10%', color: '#ffffff' }}>حالت</th>
-              </tr>
-            </thead>
-            <tbody>
-              {kharijStudents.map((s, idx) => (
-                <tr key={s._id}>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
-                    {s.rollNumber}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
-                    {s.className || s.class?.name || '—'}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', fontSize: '0.85rem', color: '#555' }}>
-                    {s.adminNote || '—'}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#991b1b' }}>
-                    خارج کردہ
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
-                <td colSpan="7" style={{ border: '1px solid #000', padding: '8px', textAlign: 'center' }}>
-                  اللہ تعالیٰ انہیں ہدایت عطا فرمائے اور مدرسے کو محفوظ رکھے — آمین
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '20px' }}>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط ناظمِ نظم و ضبط
-            </div>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط ناظمِ تعلیمات
-            </div>
-            <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط مہتممِ جامعہ
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* PRINT-ONLY: ACTIVE / CURRENTLY STUDYING STUDENTS REPORT */}
-      {printReportType === 'active_list' && !selectedStudent && (
-        <div className="print-only-attendance" style={{ display: 'none' }}>
-          <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '12px', marginBottom: '16px' }}>
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.4rem' }}>جامعہ دارالعلوم اسلامیہ مردان</h2>
-            <p style={{ margin: '0 0 4px', fontSize: '0.9rem' }}>مردان، خیبرپختونخوا، پاکستان</p>
-            <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', textDecoration: 'underline' }}>
-              زیرِ تعلیم طلباء کی فہرست (Currently Studying Students List)
-            </h3>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '0.95rem', fontWeight: 600 }}>
             <div>
-              <strong>کل زیرِ تعلیم طلباء:</strong> {activeStudentsToPrint.length}
-              {classFilter !== 'all' && <span> (درجہ: {classFilter})</span>}
+              <strong>کل طلباء:</strong> {effectivePrintReport === 'all_list' ? allStudentsToPrint.length : activeStudentsToPrint.length}
             </div>
-            <div><strong>تاریخِ پرنٹ:</strong> {new Date().toISOString().split('T')[0]}</div>
+            <div>
+              <strong>درجہ / شعبہ:</strong> {classFilter === 'all' ? 'تمام درجات' : classFilter}
+            </div>
           </div>
 
           <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
             <thead>
-              <tr style={{ background: '#030508', color: '#ffffff', borderBottom: '2px solid #000' }}>
+              <tr style={{ background: '#0f172a', color: '#ffffff', borderBottom: '2px solid #000' }}>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '6%', color: '#ffffff' }}>شمار</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '12%', color: '#ffffff' }}>رول نمبر</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '22%', color: '#ffffff' }}>نام طالب علم</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '20%', color: '#ffffff' }}>والد کا نام</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>درجہ</th>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '15%', color: '#ffffff' }}>رابطہ نمبر</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '16%', color: '#ffffff' }}>درجہ</th>
+                <th style={{ border: '1px solid #000', padding: '8px', width: '14%', color: '#ffffff' }}>رابطہ نمبر</th>
                 <th style={{ border: '1px solid #000', padding: '8px', width: '10%', color: '#ffffff' }}>حالت</th>
               </tr>
             </thead>
             <tbody>
-              {activeStudentsToPrint.map((s, idx) => (
-                <tr key={s._id}>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
-                    {s.rollNumber}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
-                    {s.className || s.class?.name || '-'}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
-                    {s.phone || s.guardianPhone || '-'}
-                  </td>
-                  <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: '#15803d' }}>
-                    فعال
+              {(effectivePrintReport === 'all_list' ? allStudentsToPrint : activeStudentsToPrint).length === 0 ? (
+                <tr>
+                  <td colSpan="7" style={{ border: '1px solid #000', textAlign: 'center', padding: '24px', color: '#444' }}>
+                    اس درجہ یا فلٹر میں کوئی طالب علم درج نہیں ہے۔
                   </td>
                 </tr>
-              ))}
+              ) : (
+                (effectivePrintReport === 'all_list' ? allStudentsToPrint : activeStudentsToPrint).map((s, idx) => (
+                  <tr key={s._id || idx}>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>{idx + 1}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
+                      {s.rollNumber}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', fontWeight: 600 }}>{s.name}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px' }}>{s.fatherName}</td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center' }}>
+                      {s.className || s.class?.name || s.class || '-'}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontFamily: 'monospace' }}>
+                      {s.phone || s.guardianPhone || '-'}
+                    </td>
+                    <td style={{ border: '1px solid #000', padding: '6px', textAlign: 'center', fontWeight: 700, color: s.status === 'kharij' ? '#991b1b' : s.status === 'graduated' ? '#047857' : '#15803d' }}>
+                      {s.status === 'kharij' ? 'خارج کردہ' : s.status === 'graduated' ? 'فارغ التحصیل' : 'فعال'}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
             <tfoot>
               <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
                 <td colSpan="7" style={{ border: '1px solid #000', padding: '8px', textAlign: 'center' }}>
-                  مجموعی زیرِ تعلیم طلباء: {activeStudentsToPrint.length} {classFilter !== 'all' ? `(${classFilter}) ` : ''}— اللہ تعالیٰ سب کو کامیابی عطا فرمائے — آمین
+                  مجموعی تعداد: {(effectivePrintReport === 'all_list' ? allStudentsToPrint : activeStudentsToPrint).length} {classFilter !== 'all' ? `(${classFilter}) ` : ''}— اللہ تعالیٰ سب کو کامیابی عطا فرمائے — آمین
                 </td>
               </tr>
             </tfoot>
@@ -1772,7 +1866,7 @@ export default function ManageStudents() {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '20px' }}>
             <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
-              دستخط ناظمِ تعلیمات
+              دستخط ناظمِ داخلہ و تعلیمات
             </div>
             <div style={{ textAlign: 'center', width: '200px', borderTop: '1px dashed #000' }}>
               دستخط مہتممِ جامعہ
