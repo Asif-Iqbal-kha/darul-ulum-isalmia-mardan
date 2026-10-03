@@ -16,6 +16,22 @@ import './PublicPages.css';
 import SEOHead from '../../components/common/SEOHead';
 import { compressImage } from '../../utils/imageCompressor';
 
+const DEFAULT_CLASSES = [
+  'حفظ قرآن کریم',
+  'ناظرہ قرآن کریم',
+  'تجوید و قراءت',
+  'کلاس چہارم (ابتدائی)',
+  'کلاس پنجم',
+  'درس نظامی (عامہ اول)',
+  'درس نظامی (عامہ دوم)',
+  'درس نظامی (خاصہ اول)',
+  'درس نظامی (خاصہ دوم)',
+  'درس نظامی (عالیہ اول)',
+  'درس نظامی (عالیہ دوم)',
+  'دورۃ الحدیث (عالمیہ)',
+  'تخصص فی الفقہ والافتاء',
+];
+
 const ADMISSION_RULES_25 = [
   'کلاس چہارم میں طالب علم کی عمر (9) سال سے کم نہ ہو۔ داخلہ کے وقت طالب علم کے والد صاحب کے شناختی کارڈ کی فوٹو کاپی اور متعلقہ طالب علم کا فارم (ب) لانا لازمی ہے۔',
   'داخلہ کے لئے دارالعلوم کے منعقدہ امتحان میں کامیابی حاصل کرنا ضروری ہے جس میں ناظرہ، اردو، ریاضی اور انگریزی کا امتحان ہوگا۔',
@@ -352,15 +368,44 @@ export default function AdmissionPage() {
                   />
                 </div>
 
-                {/* Center Title & Madrassa Info (Exact to paper form) */}
+                {/* Center Title & Madrassa Info */}
                 <div className="sheet-header-center">
-                  <h1 className="sheet-title-main">
-                    داخلہ فارم {form.desiredClass ? form.desiredClass : 'حفظ القرآن الکریم'}
-                  </h1>
+                  <h1 className="sheet-title-main">داخلہ فارم</h1>
                   <h2 className="sheet-madrassa-name">دارالعلوم اسلامیہ مردان (گلشن حقانیہ رنگ روڈ مردان)</h2>
                   <p style={{ margin: '2px 0 6px', fontSize: '0.78rem', color: '#374151', fontWeight: 600 }}>
                     رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس: 32373 (07/07/2026)
                   </p>
+                  <div className="sheet-class-badge">
+                    <span>برائے درجہ: </span>
+                    <select
+                      id="desiredClass"
+                      name="desiredClass"
+                      value={form.desiredClass}
+                      onChange={(e) => handleChange('desiredClass', e.target.value)}
+                      style={{
+                        background: 'transparent',
+                        color: '#fff',
+                        border: 'none',
+                        fontSize: '0.9rem',
+                        fontFamily: 'inherit',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        outline: 'none',
+                      }}
+                    >
+                      {classes.length > 0
+                        ? classes.map((c) => (
+                            <option key={c._id} value={c.name} style={{ color: '#000' }}>
+                              {c.name}
+                            </option>
+                          ))
+                        : DEFAULT_CLASSES.map((name) => (
+                            <option key={name} value={name} style={{ color: '#000' }}>
+                              {name}
+                            </option>
+                          ))}
+                    </select>
+                  </div>
                   <div className="sheet-section-title-badge">کوائف طالب علم</div>
                 </div>
 
@@ -508,25 +553,24 @@ export default function AdmissionPage() {
                   <div className="sheet-field-half">
                     <span className="sheet-label">الدرجہ: *</span>
                     <select
-                      id="desiredClass"
-                      name="desiredClass"
+                      id="desiredClassField"
+                      name="desiredClassField"
                       value={form.desiredClass}
                       onChange={(e) => handleChange('desiredClass', e.target.value)}
                       className="sheet-input-dotted"
                       style={{ padding: '4px', cursor: 'pointer', fontFamily: 'inherit' }}
                     >
-                      {classes.length > 0 ? (
-                        classes.map((c) => (
-                          <option key={c._id} value={c.name}>
-                            {c.name}
-                          </option>
-                        ))
-                      ) : (
-                        <>
-                          <option value="حفظ قرآن کریم">حفظ قرآن کریم</option>
-                          <option value="ناظرہ">ناظرہ</option>
-                        </>
-                      )}
+                      {classes.length > 0
+                        ? classes.map((c) => (
+                            <option key={c._id} value={c.name}>
+                              {c.name}
+                            </option>
+                          ))
+                        : DEFAULT_CLASSES.map((name) => (
+                            <option key={name} value={name}>
+                              {name}
+                            </option>
+                          ))}
                     </select>
                   </div>
                 </div>
