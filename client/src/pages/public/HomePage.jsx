@@ -214,9 +214,12 @@ export default function HomePage() {
       {/* Objectives Section */}
       <section className="section" style={{ backgroundColor: '#ffffff' }}>
         <div className="container">
-          <h2 className="section-title">دینی مدارس کا بنیادی مقصد اور اہم مقاصد</h2>
+          <div style={{ textAlign: 'center', marginBottom: '8px', fontSize: '1.3rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary-dark)', fontWeight: 700 }}>
+            ﷽
+          </div>
+          <h2 className="section-title">اغراض و مقاصد (دارالعلوم اسلامیہ مردان)</h2>
           <div className="objectives-lead-card" style={{ marginBottom: '28px' }}>
-            دینی مدارس کا بنیادی مقصد قرآن و سنت کی روشنی میں طلبا کو اسلامی تعلیمات سے روشناس کرانا اور معاشرے کے لیے ایسے صالح اور باعمل افراد تیار کرنا ہے جو دین کی صحیح فہم و فراست رکھتے ہوں۔
+            قرآن و سنت کی ترویج، دورِ حاضر کے فکری و علمی تقاضوں سے ہم آہنگ باصلاحیت علماء و فضلاء کی تیاری، اور اسلامی اقدار و تہذیب کا تحفظ دارالعلوم اسلامیہ مردان کا بنیادی نصب العین ہے۔
           </div>
 
           <div className="objectives-grid">
@@ -225,10 +228,17 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiBookOpen size={22} />
                 </div>
-                <h3 className="objective-card-title">دینی علوم کا تحفظ</h3>
+                <div>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
+                    نکتہ ۱
+                  </span>
+                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                    قرآن و حدیث کی عملی زندگی میں ترویج
+                  </h3>
+                </div>
               </div>
               <p className="objective-card-desc">
-                وحی الٰہی یعنی قرآن و سنت کے علوم کو محفوظ کرنا اور انہیں سینہ بسینہ اگلی نسلوں تک منتقل کرنا۔
+                قرآن وحدیث کی تعلیمات کو مسلمانوں کی عملی زندگی میں لانے اور ان کی مزید ترویج و اشاعت کے لیے ہمہ وقت جدوجہد کرنا۔
               </p>
             </div>
 
@@ -237,10 +247,17 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiAward size={22} />
                 </div>
-                <h3 className="objective-card-title">کردار اور اخلاقی تربیت</h3>
+                <div>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
+                    نکتہ ۲
+                  </span>
+                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                    عصری تقاضوں سے ہم آہنگ تعلیم
+                  </h3>
+                </div>
               </div>
               <p className="objective-card-desc">
-                طلبا کی اخلاقی و روحانی تربیت کرنا تاکہ وہ عملی زندگی میں اسلامی اصولوں کے مطابق زندگی بسر کر سکیں۔
+                جدید دور کے علمی تقاضوں کو مدنظر رکھتے ہوئے قرآن، حدیث، فقہ اور عقائد کی ایسی محققانہ تعلیم دینا جس سے عصری تقاضوں کو سمجھنے والے صاحبِ بصیرت علماء پیدا ہوں۔
               </p>
             </div>
 
@@ -249,10 +266,17 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiUsers size={22} />
                 </div>
-                <h3 className="objective-card-title">دینی قیادت کی فراہمی</h3>
+                <div>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
+                    نکتہ ۳
+                  </span>
+                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                    تخصصات و شعبہ ہائے زندگی میں خدمات
+                  </h3>
+                </div>
               </div>
               <p className="objective-card-desc">
-                معاشرے کو مسجد و محراب کے لیے امام، خطیب، مفتی اور معلم مہیا کرنا جو دینی مسائل میں عوام کی رہنمائی کر سکیں۔
+                تفسیر، حدیث، فقہ، قضاء، دعوت و ارشاد میں تخصص اور سیاسیات، اقتصادیات و صحافت کے شعبوں میں کام کرنے والے فضلاء کی تیاری۔
               </p>
             </div>
 
@@ -261,17 +285,24 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiShield size={22} />
                 </div>
-                <h3 className="objective-card-title">اسلامی اقدار کا دفاع</h3>
+                <div>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
+                    نکتہ ۷
+                  </span>
+                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                    نوجوان طبقے کی فکری و اخلاقی حفاظت
+                  </h3>
+                </div>
               </div>
               <p className="objective-card-desc">
-                اسلامی عقائد، ثقافت اور اقدار کا تحفظ کرنا اور وقت کے فکری و نظری چیلنجز کا علمی انداز میں مقابلہ کرنا۔
+                نوجوان طبقے کو دورِ جدید کے فتنوں سے بچا کر ان کے ذہن میں صحیح اسلامی عقائد راسخ کرنے اور اسلامی طرزِ معاشرت عام کرنے کی سعی کرنا۔
               </p>
             </div>
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '28px' }}>
-            <Link to="/about" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-              <span>دینی درس گاہوں کے منہاج و مقاصد کی مکمل تفصیلات پڑھیں</span>
+            <Link to="/about" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <span>دارالعلوم اسلامیہ مردان کے تمام ۱۰ اغراض و مقاصد تفصیل سے پڑھیں</span>
               <FiArrowLeft size={16} />
             </Link>
           </div>

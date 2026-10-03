@@ -1,6 +1,69 @@
-import { FiBookOpen, FiShield, FiUsers, FiAward } from 'react-icons/fi';
+import { FiBookOpen, FiShield, FiUsers, FiAward, FiGlobe, FiTv, FiSearch, FiCheckCircle } from 'react-icons/fi';
 import SEOHead from '../../components/common/SEOHead';
 import './PublicPages.css';
+
+const objectivesList = [
+  {
+    num: '۱',
+    icon: <FiBookOpen size={22} />,
+    title: 'قرآن و حدیث کی تعلیمات کی ترویج',
+    desc: 'قرآن وحدیث کی تعلیمات کو مسلمانوں کی عملی زندگی میں لانے اور ان کی مزید ترویج و اشاعت کے لیے ہمہ وقت جدوجہد کرنا۔'
+  },
+  {
+    num: '۲',
+    icon: <FiAward size={22} />,
+    title: 'عصری تقاضوں سے ہم آہنگ محققانہ تعلیم',
+    desc: 'جدید دور کے علمی تقاضوں کو مدنظر رکھتے ہوئے طلباء کو قرآن، حدیث، فقہ اور عقائد کی ایسی جامع، مکمل اور محققانہ تعلیم دینا جس کے نتیجے میں عصری تقاضوں کو سمجھ کر مسلمانوں کی دینی رہنمائی کرنے والے صاحبِ بصیرت علماء پیدا ہوں۔'
+  },
+  {
+    num: '۳',
+    icon: <FiUsers size={22} />,
+    title: 'تخصصات اور شعبہ ہائے زندگی میں خدمات',
+    desc: 'مروجہ علوم دینیہ کی تکمیل کے بعد ہر سال فضلاء کی ایک جماعت منتخب کر کے انہیں تفسیر، حدیث، فقہ، قضاء، دعوت و ارشاد اور دیگر علوم میں تخصص کروانا۔ نیز سیاسیات، اقتصادیات اور صحافت کے شعبوں میں کام کرنے والے فضلاء کو خصوصی تربیت دینا، تاکہ ان شعبوں کے ساتھ مختلف شعبہ ہائے زندگی میں فضلاء دارالعلوم دینی و ملی خدمات انجام دے سکیں۔'
+  },
+  {
+    num: '۴',
+    icon: <FiGlobe size={22} />,
+    title: 'عربی اور انگریزی زبانوں پر خصوصی توجہ',
+    desc: 'بیرونی دنیا کے ساتھ رابطہ کی دونوں بڑی زبانوں عربی اور انگریزی کی تعلیم پر خصوصی توجہ دینا۔'
+  },
+  {
+    num: '۵',
+    icon: <FiCheckCircle size={22} />,
+    title: 'جدید طرقِ تدریس سے روشناسی',
+    desc: 'فضلاء کو جدید طرقِ تدریس اور مسائلِ تعلیم سے روشناس کرنا۔'
+  },
+  {
+    num: '۶',
+    icon: <FiTv size={22} />,
+    title: 'میڈیا پر اسلام کی صحیح ترجمانی',
+    desc: 'پرنٹ و الیکٹرانک میڈیا پر اسلام کی صحیح ترجمانی کے لیے طلباء کی تحریری و تقریری صلاحیتوں کی آبیاری کرنا۔'
+  },
+  {
+    num: '۷',
+    icon: <FiShield size={22} />,
+    title: 'نوجوان طبقے کی فکری و اخلاقی حفاظت',
+    desc: 'نوجوان طبقے کو دورِ جدید کے فتنوں سے بچا کر ان کے ذہن میں صحیح اسلامی عقائد راسخ کرنے اور اسلامی اخلاق اور طرزِ معاشرت عام کرنے کی سعی و کوشش کرنا۔'
+  },
+  {
+    num: '۸',
+    icon: <FiBookOpen size={22} />,
+    title: 'خواتین کے لیے دینی تعلیم و تربیت',
+    desc: 'خواتین میں قرآن و حدیث کی تعلیمات کو عام کرنے اور ہر گھر کی دینی و علمی ضروریات پوری کرنے کے لیے صحیح الفکر عالمات و فاضلات تیار کرنا۔'
+  },
+  {
+    num: '۹',
+    icon: <FiAward size={22} />,
+    title: 'اسلامی تہذیب و ثقافت کی بقا و ترویج',
+    desc: 'اسلامی تہذیب و ثقافت کی بقاء اور ترویج کے لیے کوشش کرنا۔'
+  },
+  {
+    num: '۱۰',
+    icon: <FiSearch size={22} />,
+    title: 'علمی تحقیق اور الحاد کا سدباب',
+    desc: 'جدید فتنوں کے علمی تعاقب اور الحاد و بے دینی کی فکری یلغار کو روکنے کے لیے تحقیق و ریسرچ کے اداروں کے قیام کے ساتھ ساتھ بہترین رجالِ کار کی فراہمی۔'
+  }
+];
 
 export default function AboutPage() {
   return (
@@ -35,63 +98,35 @@ export default function AboutPage() {
 
           {/* Section 2: Core Purpose & Key Objectives (Aims & Objectives) */}
           <div className="content-block">
-            <h2>دینی مدارس کا بنیادی مقصد اور اہم مقاصد</h2>
+            <div style={{ textAlign: 'center', marginBottom: '14px', fontSize: '1.4rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary-dark)', fontWeight: 700 }}>
+              ﷽
+            </div>
+            <h2>اغراض و مقاصد (دارالعلوم اسلامیہ مردان)</h2>
             <div className="objectives-lead-card">
-              دینی مدارس کا بنیادی مقصد قرآن و سنت کی روشنی میں طلبا کو اسلامی تعلیمات سے روشناس کرانا اور معاشرے کے لیے ایسے صالح اور باعمل افراد تیار کرنا ہے جو دین کی صحیح فہم و فراست رکھتے ہوں۔
+              جامعہ دارالعلوم اسلامیہ مردان کا بنیادی نصب العین قرآن و سنت کی اشاعت، دورِ حاضر کے فکری و علمی تقاضوں سے ہم آہنگ باصلاحیت علماء و فضلاء کی تیاری، اور اسلامی اقدار و تہذیب کا تحفظ ہے۔
             </div>
 
             <div className="objectives-grid">
-              {/* Pillar 1 */}
-              <div className="objective-item-card">
-                <div className="objective-card-header">
-                  <div className="objective-card-icon">
-                    <FiBookOpen size={22} />
+              {objectivesList.map((item) => (
+                <div key={item.num} className="objective-item-card">
+                  <div className="objective-card-header">
+                    <div className="objective-card-icon" style={{ position: 'relative' }}>
+                      {item.icon}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <span style={{ display: 'inline-block', fontSize: '0.8rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 8px', borderRadius: '12px', fontWeight: 700, marginBottom: '4px' }}>
+                        نکتہ نمبر {item.num}
+                      </span>
+                      <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: 0 }}>
+                        {item.title}
+                      </h3>
+                    </div>
                   </div>
-                  <h3 className="objective-card-title">دینی علوم کا تحفظ</h3>
+                  <p className="objective-card-desc" style={{ lineHeight: '1.9', fontSize: '0.95rem' }}>
+                    {item.desc}
+                  </p>
                 </div>
-                <p className="objective-card-desc">
-                  وحی الٰہی یعنی قرآن و سنت کے علوم کو محفوظ کرنا اور انہیں سینہ بسینہ اگلی نسلوں تک منتقل کرنا۔
-                </p>
-              </div>
-
-              {/* Pillar 2 */}
-              <div className="objective-item-card">
-                <div className="objective-card-header">
-                  <div className="objective-card-icon">
-                    <FiAward size={22} />
-                  </div>
-                  <h3 className="objective-card-title">کردار اور اخلاقی تربیت</h3>
-                </div>
-                <p className="objective-card-desc">
-                  طلبا کی اخلاقی و روحانی تربیت کرنا تاکہ وہ عملی زندگی میں اسلامی اصولوں کے مطابق زندگی بسر کر سکیں۔
-                </p>
-              </div>
-
-              {/* Pillar 3 */}
-              <div className="objective-item-card">
-                <div className="objective-card-header">
-                  <div className="objective-card-icon">
-                    <FiUsers size={22} />
-                  </div>
-                  <h3 className="objective-card-title">دینی قیادت کی فراہمی</h3>
-                </div>
-                <p className="objective-card-desc">
-                  معاشرے کو مسجد و محراب کے لیے امام، خطیب، مفتی اور معلم مہیا کرنا جو دینی مسائل میں عوام کی رہنمائی کر سکیں۔
-                </p>
-              </div>
-
-              {/* Pillar 4 */}
-              <div className="objective-item-card">
-                <div className="objective-card-header">
-                  <div className="objective-card-icon">
-                    <FiShield size={22} />
-                  </div>
-                  <h3 className="objective-card-title">اسلامی اقدار کا دفاع</h3>
-                </div>
-                <p className="objective-card-desc">
-                  اسلامی عقائد، ثقافت اور اقدار کا تحفظ کرنا اور وقت کے فکری و نظری چیلنجز کا علمی انداز میں مقابلہ کرنا۔
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
