@@ -79,13 +79,13 @@ export default function MuhtamimMessagePage() {
 
                 <div className="muhtamim-creds-strip">
                   <span className="cred-chip">
-                    <FiCheckCircle size={14} /> ملحق وفاق المدارس العربیہ پاکستان (14303)
+                    <FiCheckCircle size={14} /> ملحق وفاق المدارس: 32373 (07/07/2026)
                   </span>
                   <span className="cred-chip">
-                    <FiCheckCircle size={14} /> رجسٹرڈ حکومتِ پاکستان (1860)
+                    <FiCheckCircle size={14} /> رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025)
                   </span>
                   <span className="cred-chip">
-                    <FiMapPin size={14} /> رنگ روڈ، مردان، خیبرپختونخوا
+                    <FiMapPin size={14} /> کاٹلنگ روڈ، چار بانڈہ، مردان
                   </span>
                 </div>
 

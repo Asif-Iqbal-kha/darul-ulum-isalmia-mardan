@@ -105,7 +105,7 @@ export default function HomePage() {
           {/* Official Letterhead Header Row */}
           <div className="hero-header-row">
             <div className="hero-header-side hero-header-right">
-              رجسٹرڈ آف حکومت پاکستان (1860)
+              رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025)
             </div>
 
             <div className="hero-logo-wrapper">
@@ -113,7 +113,7 @@ export default function HomePage() {
             </div>
 
             <div className="hero-header-side hero-header-left">
-              ملحق وفاق المدارس العربیہ پاکستان (14303)
+              ملحق وفاق المدارس: 32373 (07/07/2026)
             </div>
           </div>
 

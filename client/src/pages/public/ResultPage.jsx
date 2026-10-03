@@ -227,6 +227,9 @@ export default function ResultPage() {
                       <div className="result-madrassa-info">
                         <h3 className="result-madrassa-name">جامعہ دارالعلوم اسلامیہ مردان</h3>
                         <p className="result-madrassa-sub">مردان، خیبرپختونخوا، پاکستان</p>
+                        <p style={{ margin: '1px 0 6px', fontSize: '0.78rem', color: '#4b5563', fontWeight: 600 }}>
+                          رجسٹرڈ حکومتِ پاکستان: 59942/18649 | ملحق وفاق المدارس: 32373
+                        </p>
                         <div className="result-sheet-title">
                           <span>کشف الدرجات (امتحانی سند و رزلٹ کارڈ)</span>
                         </div>
