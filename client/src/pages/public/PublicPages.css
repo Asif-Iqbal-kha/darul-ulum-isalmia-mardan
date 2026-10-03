@@ -53,14 +53,14 @@
   height: 140px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 4px solid var(--color-accent);
+  border: 3px solid rgba(255, 255, 255, 0.9);
   padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   flex-shrink: 0;
-  box-shadow: 0 0 0 8px rgba(184, 150, 12, 0.2), var(--shadow-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
 .hero-logo-img {
@@ -159,19 +159,18 @@
 .class-card {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-top: 4px solid var(--color-primary);
-  border-radius: var(--radius-md);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
   padding: 22px 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 
 .class-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  border-top-color: var(--color-accent);
+  border-color: #94a3b8;
+  border-top-color: var(--color-primary);
 }
 
 .class-card h3 {
@@ -228,48 +227,64 @@
   color: var(--color-text-muted);
 }
 
-/* News Cards */
+/* News Cards - Clean Institutional Style */
 .news-card {
-  position: relative;
-}
-
-.news-card-category {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background-color: var(--color-primary);
-  color: var(--color-text-on-dark);
-  font-size: 0.6875rem;
-  padding: 2px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
 }
 
-.news-card .card-body {
-  padding-top: 24px;
-}
-
-.news-card-title {
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  color: var(--color-primary);
-  margin-bottom: 8px;
-  line-height: 1.6;
-}
-
-.news-card-text {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  line-height: 1.8;
+.news-card:hover {
+  border-color: #94a3b8;
 }
 
 .news-card-date {
   font-family: var(--font-english);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
-  margin-top: 12px;
+  margin-bottom: 8px;
   direction: ltr;
   text-align: right;
+  font-weight: 500;
+}
+
+.news-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.news-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.9;
+  flex-grow: 1;
+  margin-bottom: 16px;
+}
+
+.news-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-light);
+  transition: color 0.2s ease;
+}
+
+.news-card-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* Quick Link Cards */
@@ -2517,93 +2532,132 @@
   }
 }
 
-/* ===== Objectives & Ideology / Manifesto Styles ===== */
+/* ===== Objectives & Ideology / Manifesto Styles - Institutional Official Style ===== */
 .objectives-lead-card {
-  background: linear-gradient(135deg, rgba(20, 50, 35, 0.04) 0%, rgba(184, 150, 12, 0.08) 100%);
-  border-right: 4px solid var(--color-accent);
-  padding: 24px 30px;
-  border-radius: var(--radius-md);
-  margin-bottom: 30px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-right: 4px solid var(--color-primary);
+  padding: 20px 26px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 28px;
   font-size: 1.15rem;
   line-height: 2.2;
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   font-weight: 500;
 }
 
 .objectives-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .objective-item-card {
-  background: var(--color-bg-card, #ffffff);
-  border: 1px solid var(--color-border-light, #e5e7eb);
-  border-radius: var(--radius-lg, 12px);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg);
+  border: 1px solid #e2e8f0;
+  border-right: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease;
   position: relative;
-  overflow: hidden;
 }
 
 .objective-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-accent);
-}
-
-.objective-item-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-color: #cbd5e1;
+  border-right-color: var(--color-accent);
 }
 
 .objective-card-header {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
 .objective-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(20, 50, 35, 0.08);
-  color: var(--color-primary-dark);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.objective-card-title {
-  font-size: 1.4rem;
+.objective-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.objective-num-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  background: #f1f5f9;
+  color: var(--color-primary);
+  border: 1px solid #cbd5e1;
+  padding: 1px 8px;
+  border-radius: 3px;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.objective-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
   margin: 0;
+  line-height: 1.4;
 }
 
 .objective-card-desc {
-  color: var(--color-text-secondary);
+  color: #334155;
   line-height: 2.1;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
+  margin: 0;
+  text-align: justify;
+}
+
+/* Institutional Memo Block */
+.institutional-memo-block {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-right: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.institutional-memo-title {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.institutional-memo-text {
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 2.1;
   margin: 0;
 }
 
 /* Manifesto / Scholarly Treatise Section */
 .manifesto-container {
   background: #ffffff;
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
   padding: 36px 40px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .manifesto-paragraph {
@@ -3210,35 +3264,23 @@
 =================================================== */
 
 .muhtamim-hero-header {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a365d 100%);
-  padding: 48px 0 36px;
+  background: #0f172a;
+  padding: 44px 0 32px;
   position: relative;
-  overflow: hidden;
-}
-
-.muhtamim-hero-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: radial-gradient(rgba(2, 132, 199, 0.15) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
+  border-bottom: 1px solid #1e293b;
 }
 
 .muhtamim-breadcrumbs {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.95rem;
-  color: var(--color-accent-light);
-  margin-bottom: 14px;
+  font-size: 0.92rem;
+  color: #94a3b8;
+  margin-bottom: 12px;
 }
 
 .muhtamim-breadcrumbs a {
-  color: #bae6fd;
+  color: #cbd5e1;
   text-decoration: none;
   transition: color var(--transition-base);
 }
@@ -3249,7 +3291,7 @@
 }
 
 .crumb-separator {
-  color: rgba(255, 255, 255, 0.4);
+  color: #64748b;
 }
 
 .crumb-active {
@@ -3259,108 +3301,93 @@
 
 .muhtamim-header-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   color: #ffffff;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   line-height: 1.4;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .muhtamim-header-subtitle {
-  color: #e0f2fe;
-  font-size: 1.2rem;
+  color: #cbd5e1;
+  font-size: 1.15rem;
   margin: 0;
   line-height: 1.8;
 }
 
 .muhtamim-page-body {
   background: #f8fafc;
-  padding: 48px 0 64px;
+  padding: 40px 0 60px;
 }
 
-/* Top Showcase Card */
+/* Top Showcase Card - Official Institutional Layout */
 .muhtamim-showcase-card {
   background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  padding: 40px;
-  margin-bottom: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 36px 40px;
+  margin-bottom: 36px;
   position: relative;
-  overflow: hidden;
-}
-
-.muhtamim-showcase-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--color-accent), var(--color-primary));
 }
 
 .muhtamim-profile-row {
   display: flex;
-  gap: 40px;
-  align-items: center;
+  gap: 36px;
+  align-items: flex-start;
 }
 
-/* Photo Column */
+/* Photo Column - Dignified Executive Portrait Framing */
 .muhtamim-photo-col {
-  flex: 0 0 320px;
-  display: flex;
-  justify-content: center;
+  flex: 0 0 280px;
 }
 
-.muhtamim-frame-container {
-  position: relative;
-  width: 290px;
-  border-radius: 16px;
-  padding: 8px;
-  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
-  border: 2px solid #cbd5e1;
+.muhtamim-official-photo-wrap {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
 
-.muhtamim-gold-border-decor {
-  position: absolute;
-  inset: 4px;
-  border: 2px solid var(--color-accent);
-  border-radius: 12px;
-  pointer-events: none;
-  opacity: 0.6;
+.muhtamim-photo-border {
+  padding: 6px;
+  background: #ffffff;
 }
 
 .muhtamim-photo-img {
   width: 100%;
-  height: 360px;
+  height: 340px;
   object-fit: cover;
   object-position: top center;
-  border-radius: 10px;
+  border-radius: 2px;
   display: block;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s ease;
 }
 
-.muhtamim-frame-container:hover .muhtamim-photo-img {
-  transform: scale(1.02);
+.muhtamim-photo-caption {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  text-align: center;
 }
 
-.muhtamim-badge-ribbon {
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: #ffffff;
-  padding: 6px 20px;
-  border-radius: 20px;
-  font-size: 0.95rem;
+.caption-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
   font-weight: 700;
-  border: 2px solid var(--color-accent);
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #0f172a;
+}
+
+.caption-title {
+  font-size: 0.88rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.caption-inst {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 2px;
 }
 
 /* Meta & Info Column */
@@ -3371,203 +3398,190 @@
 .muhtamim-official-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--color-sky-soft);
-  color: var(--color-primary);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  gap: 6px;
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 14px;
-  border: 1px solid rgba(2, 132, 199, 0.2);
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
 }
 
 .muhtamim-leader-name {
   font-family: var(--font-heading);
-  font-size: 2.3rem;
-  color: var(--color-primary);
-  margin: 0 0 8px;
+  font-size: 2.2rem;
+  color: #0f172a;
+  margin: 0 0 6px;
   line-height: 1.4;
 }
 
 .muhtamim-leader-designation {
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  margin: 0 0 18px;
+  font-size: 1.18rem;
+  color: var(--color-primary);
+  margin: 0 0 16px;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .muhtamim-creds-strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
 .cred-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #f1f5f9;
+  background: #f8fafc;
   border: 1px solid #cbd5e1;
   color: #334155;
-  padding: 4px 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 0.88rem;
   font-weight: 600;
 }
 
 .muhtamim-lead-quote {
   position: relative;
-  background: #f0f9ff;
-  border-right: 4px solid var(--color-accent);
-  padding: 18px 24px;
-  border-radius: 8px;
-  margin-bottom: 26px;
-}
-
-.lead-quote-mark {
-  position: absolute;
-  top: -8px;
-  left: 16px;
-  font-size: 3rem;
-  color: rgba(2, 132, 199, 0.2);
-  line-height: 1;
-  font-family: serif;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-right: 4px solid var(--color-primary);
+  padding: 18px 22px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
 }
 
 .muhtamim-lead-quote p {
   margin: 0;
-  font-size: 1.18rem;
-  color: var(--color-primary-dark);
+  font-size: 1.15rem;
+  color: #0f172a;
   line-height: 2.1;
   font-weight: 500;
 }
 
 .muhtamim-header-actions {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 /* Strategic Pillars Section */
 .muhtamim-pillars-section {
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 32px 32px 36px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .pillars-section-title {
   font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.8rem;
-  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 1.7rem;
+  margin: 0 0 6px;
   text-align: center;
 }
 
 .pillars-section-subtitle {
   text-align: center;
-  color: var(--color-text-secondary);
-  font-size: 1.1rem;
-  margin: 0 0 28px;
+  color: #64748b;
+  font-size: 1.05rem;
+  margin: 0 0 24px;
 }
 
 .muhtamim-pillars-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
 }
 
 .pillar-item-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 24px 18px;
+  border-radius: var(--radius-sm);
+  padding: 20px 16px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
   position: relative;
-  overflow: hidden;
 }
 
 .pillar-item-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
+  border-color: #94a3b8;
   background: #ffffff;
 }
 
 .pillar-icon-box {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 16px;
-  background: var(--color-sky-soft);
-  color: var(--color-accent);
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  background: #ffffff;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(2, 132, 199, 0.2);
+  border: 1px solid #cbd5e1;
 }
 
 .pillar-item-card h4 {
   font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.25rem;
-  margin: 0 0 10px;
+  color: #0f172a;
+  font-size: 1.18rem;
+  margin: 0 0 8px;
 }
 
 .pillar-item-card p {
   color: #475569;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   line-height: 1.9;
   margin: 0;
 }
 
-/* Full Message Article */
+/* Full Message Article - Official Document Presentation */
 .muhtamim-message-article {
   background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-  padding: 44px 48px;
-  margin-bottom: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 40px 48px;
+  margin-bottom: 36px;
 }
 
 /* Arabic Khutba */
 .arabic-khutba-box {
   text-align: center;
-  background: linear-gradient(135deg, #18225e 0%, #0f1640 100%);
+  background: #0f172a;
   color: #ffffff;
-  padding: 28px 24px;
-  border-radius: 12px;
-  margin-bottom: 36px;
-  border: 2px solid var(--color-accent);
-  box-shadow: 0 6px 20px rgba(24, 34, 94, 0.15);
+  padding: 24px 20px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 32px;
+  border: 1px solid #334155;
 }
 
 .arabic-khutba-bismillah {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
-  color: #fef08a;
-  margin: 0 0 12px;
+  font-size: 1.7rem;
+  color: #ffffff;
+  margin: 0 0 10px;
   letter-spacing: 0.5px;
 }
 
 .arabic-khutba-text {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   line-height: 2.2;
-  color: #e0f2fe;
+  color: #cbd5e1;
   margin: 0;
 }
 
 /* Message Sections */
 .message-section {
-  margin-bottom: 34px;
+  margin-bottom: 32px;
 }
 
 .message-section-heading {
@@ -3575,20 +3589,20 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.6rem;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 10px;
-  margin: 0 0 16px;
+  color: #0f172a;
+  font-size: 1.55rem;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 8px;
+  margin: 0 0 14px;
 }
 
 .section-heading-icon {
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .message-body-text {
-  font-size: 1.22rem;
-  line-height: 2.35;
+  font-size: 1.2rem;
+  line-height: 2.3;
   color: #1e293b;
   margin-bottom: 16px;
   text-align: justify;
@@ -3600,39 +3614,39 @@
   font-weight: 700;
 }
 
-/* Callout Box */
+/* Official Memorandum Callout Box */
 .muhtamim-callout-box {
-  background: #f0fdf4;
-  border: 2px solid #86efac;
-  border-right-width: 6px;
-  border-radius: 12px;
-  padding: 24px 28px;
-  margin: 32px 0;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-right: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 22px 26px;
+  margin: 28px 0;
   position: relative;
 }
 
 .callout-icon-tag {
   display: inline-block;
-  background: #16a34a;
+  background: var(--color-primary);
   color: #ffffff;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 0.82rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .callout-title {
   font-family: var(--font-heading);
-  font-size: 1.45rem;
-  color: #166534;
-  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: #0f172a;
+  margin: 0 0 8px;
 }
 
 .callout-text {
-  color: #14532d;
-  font-size: 1.15rem;
-  line-height: 2.2;
+  color: #334155;
+  font-size: 1.12rem;
+  line-height: 2.1;
   margin: 0;
 }
 
@@ -3640,66 +3654,67 @@
 .roadmap-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-top: 20px;
+  gap: 16px;
+  margin-top: 18px;
 }
 
 .roadmap-card {
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 20px;
+  border-right: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
   position: relative;
-  padding-right: 56px;
+  padding-right: 50px;
 }
 
 .roadmap-step-badge {
   position: absolute;
-  top: 18px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  top: 16px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
   background: var(--color-primary);
   color: #ffffff;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .roadmap-card h5 {
   font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.2rem;
-  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 1.15rem;
+  margin: 0 0 6px;
 }
 
 .roadmap-card p {
   color: #475569;
-  font-size: 1rem;
-  line-height: 1.9;
+  font-size: 0.95rem;
+  line-height: 1.85;
   margin: 0;
 }
 
-/* Signature & Closing */
+/* Signature & Official Verification Block */
 .muhtamim-signature-block {
-  margin-top: 48px;
-  border-top: 2px dashed #cbd5e1;
-  padding-top: 32px;
+  margin-top: 40px;
+  border-top: 1px solid #cbd5e1;
+  padding-top: 28px;
 }
 
 .closing-dua {
-  background: #fefce8;
-  border: 1px solid #fef08a;
-  border-radius: 10px;
-  padding: 18px 24px;
-  font-size: 1.2rem;
-  line-height: 2.2;
-  color: #854d0e;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 1.15rem;
+  line-height: 2.1;
+  color: #0f172a;
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   font-weight: 600;
 }
 
@@ -3713,8 +3728,8 @@
 .signature-right-meta {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 0.95rem;
+  gap: 4px;
+  font-size: 0.92rem;
   color: #64748b;
 }
 
@@ -3724,12 +3739,12 @@
 }
 
 .sign-date-val {
-  color: var(--color-primary);
+  color: #0f172a;
   font-weight: 600;
 }
 
 .sign-location {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .signature-center-seal {
@@ -3738,117 +3753,110 @@
 }
 
 .official-signature-img {
-  max-height: 65px;
+  max-height: 60px;
   object-fit: contain;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   display: block;
 }
 
 .signatory-name {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  color: var(--color-primary);
+  font-size: 1.4rem;
+  color: #0f172a;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .signatory-role {
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   margin-bottom: 2px;
 }
 
 .signatory-inst {
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 /* Bottom Nav Quick Cards */
 .muhtamim-bottom-nav-box {
   background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 28px 32px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 24px 28px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .bottom-nav-title {
   font-family: var(--font-heading);
-  color: var(--color-primary);
-  font-size: 1.3rem;
-  margin: 0 0 18px;
+  color: #0f172a;
+  font-size: 1.25rem;
+  margin: 0 0 16px;
   text-align: center;
 }
 
 .bottom-nav-links {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .bottom-link-card {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 14px 12px;
-  color: var(--color-primary);
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  color: #0f172a;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.98rem;
-  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .bottom-link-card:hover {
-  background: var(--color-primary);
-  color: #ffffff;
+  background: #ffffff;
   border-color: var(--color-primary);
-  transform: translateY(-2px);
+  color: var(--color-primary);
 }
 
-/* Homepage Muhtamim Teaser Section */
+/* Homepage Muhtamim Executive Spotlight Section */
 .home-muhtamim-section {
-  background: linear-gradient(135deg, #0f172a 0%, #18225e 100%);
+  background: #0f172a;
   color: #ffffff;
-  padding: 64px 0;
+  padding: 56px 0;
   position: relative;
-  overflow: hidden;
-}
-
-.home-muhtamim-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.18) 0%, transparent 40%);
-  pointer-events: none;
+  border-top: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
 }
 
 .home-muhtamim-container {
   display: flex;
-  gap: 40px;
+  gap: 36px;
   align-items: center;
   position: relative;
   z-index: 1;
 }
 
 .home-muhtamim-photo-box {
-  flex: 0 0 260px;
+  flex: 0 0 240px;
   text-align: center;
 }
 
 .home-muhtamim-photo-frame {
-  width: 220px;
-  height: 270px;
-  border-radius: 14px;
+  width: 210px;
+  height: 260px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 3px solid var(--color-accent);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  margin: 0 auto 12px;
+  border: 2px solid #334155;
+  margin: 0 auto 10px;
   background: #ffffff;
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .home-muhtamim-photo-frame img {
@@ -3867,28 +3875,28 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(2, 132, 199, 0.25);
-  border: 1px solid var(--color-accent);
-  color: #7dd3fc;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .home-muhtamim-title {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   color: #ffffff;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   line-height: 1.4;
 }
 
 .home-muhtamim-subtitle {
-  color: var(--color-accent-light);
-  font-size: 1.15rem;
-  margin: 0 0 18px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  margin: 0 0 16px;
   font-weight: 600;
 }
 

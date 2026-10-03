@@ -89,15 +89,6 @@ export default function Footer() {
           <div className="container footer-bottom-inner">
             <p>جملہ حقوق محفوظ ہیں &copy; {new Date().getFullYear()} جامعہ دارالعلوم اسلامیہ مردان</p>
 
-            <button
-              type="button"
-              onClick={() => setShowRulesModal(true)}
-              className="footer-rules-badge-btn"
-            >
-              <FiFileText size={14} />
-              <span>دستور العمل، آئین و قواعد و ضوابط ملاحظہ فرمائیں</span>
-            </button>
-
             <div className="footer-credits" dir="ltr">
               <span>Developed by <strong className="credit-highlight">Engr Asif Iqbal</strong></span>
               <span className="footer-credits-dot">•</span>

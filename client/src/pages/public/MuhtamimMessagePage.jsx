@@ -44,33 +44,36 @@ export default function MuhtamimMessagePage() {
       <div className="content-page muhtamim-page-body">
         <div className="container">
 
-          {/* Top Profile & Welcome Showcase Card */}
+          {/* Top Profile & Official Leadership Showcase */}
           <div className="muhtamim-showcase-card">
             <div className="muhtamim-profile-row">
               {/* Photo Column */}
               <div className="muhtamim-photo-col">
-                <div className="muhtamim-frame-container">
-                  <div className="muhtamim-gold-border-decor"></div>
-                  <img
-                    src="/molana-tahir.jpg"
-                    alt="حضرت مولانا محمد حقانی راشد صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
-                    className="muhtamim-photo-img"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = '/logo.png';
-                    }}
-                  />
-                  <div className="muhtamim-badge-ribbon">
-                    <span>مہتمم و سرپرست</span>
+                <div className="muhtamim-official-photo-wrap">
+                  <div className="muhtamim-photo-border">
+                    <img
+                      src="/molana-tahir.jpg"
+                      alt="حضرت مولانا محمد حقانی راشد صاحب - مہتمم جامعہ دارالعلوم اسلامیہ مردان"
+                      className="muhtamim-photo-img"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/logo.png';
+                      }}
+                    />
+                  </div>
+                  <div className="muhtamim-photo-caption">
+                    <div className="caption-name">حضرت مولانا محمد حقانی راشد صاحب</div>
+                    <div className="caption-title">مہتمم و سرپرستِ اعلیٰ</div>
+                    <div className="caption-inst">جامعہ دارالعلوم اسلامیہ مردان</div>
                   </div>
                 </div>
               </div>
 
-              {/* Leader Meta & Brief Column */}
+              {/* Leader Meta & Statement Column */}
               <div className="muhtamim-info-col">
                 <div className="muhtamim-official-tag">
-                  <FiAward size={16} />
-                  <span>قیادت و رہنمائی کا پیغام | Official Leadership Address</span>
+                  <FiAward size={15} />
+                  <span>پیغامِ قیادت و رہنمائی | Official Leadership Address</span>
                 </div>
                 <h2 className="muhtamim-leader-name">حضرت مولانا محمد حقانی راشد صاحب</h2>
                 <h3 className="muhtamim-leader-designation">
@@ -90,7 +93,6 @@ export default function MuhtamimMessagePage() {
                 </div>
 
                 <div className="muhtamim-lead-quote">
-                  <span className="lead-quote-mark">“</span>
                   <p>
                     تعلیم صرف کتابی معلومات کا حصول نہیں، بلکہ قلب و روح کا تزکیہ، اخلاق کی تعمیر اور نئی نسل کو قرآن و سنت کے لازوال اصولوں کی روشنی میں باوقار و باکردار مسلمان بنانا ہے۔ ہمارا نصب العین ایسے رجالِ کار تیار کرنا ہے جو معاشرے کے لیے مشعلِ راہ ثابت ہوں۔
                   </p>

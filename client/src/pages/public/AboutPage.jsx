@@ -110,19 +110,19 @@ export default function AboutPage() {
               {objectivesList.map((item) => (
                 <div key={item.num} className="objective-item-card">
                   <div className="objective-card-header">
-                    <div className="objective-card-icon" style={{ position: 'relative' }}>
+                    <div className="objective-card-icon">
                       {item.icon}
                     </div>
-                    <div style={{ flex: 1 }}>
-                      <span style={{ display: 'inline-block', fontSize: '0.8rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 8px', borderRadius: '12px', fontWeight: 700, marginBottom: '4px' }}>
-                        نکتہ نمبر {item.num}
+                    <div className="objective-card-meta">
+                      <span className="objective-num-tag">
+                        ہدف نمبر {item.num}
                       </span>
-                      <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: 0 }}>
+                      <h3 className="objective-card-title">
                         {item.title}
                       </h3>
                     </div>
                   </div>
-                  <p className="objective-card-desc" style={{ lineHeight: '1.9', fontSize: '0.95rem' }}>
+                  <p className="objective-card-desc">
                     {item.desc}
                   </p>
                 </div>
@@ -179,12 +179,12 @@ export default function AboutPage() {
               </p>
 
               {/* Foundation Location Callout */}
-              <div style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(14, 116, 144, 0.08) 100%)', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '12px', padding: '20px 24px', margin: '22px 0' }}>
-                <h4 style={{ margin: '0 0 10px', color: 'var(--color-primary-dark)', fontSize: '1.18rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <FiAward size={20} />
-                  دارالعلوم اسلامیہ مردان کی اساس و سنگِ بنیاد
+              <div className="institutional-memo-block">
+                <h4 className="institutional-memo-title">
+                  <FiAward size={18} />
+                  <span>دارالعلوم اسلامیہ مردان کی اساس و سنگِ بنیاد</span>
                 </h4>
-                <p style={{ margin: 0, lineHeight: '2', color: 'var(--color-text)', fontSize: '1.02rem' }}>
+                <p className="institutional-memo-text">
                   مسلمانوں کے بچوں کو قرآنِ پاک کے انوار سے منور کرنے کے لیے مردان کی سرزمین پر <strong>کاٹلنگ روڈ کے قریب، رنگ روڈ کے نزدیک، چار بانڈہ</strong> کے علاقے میں <strong>دارالعلوم اسلامیہ مردان</strong> کی بنیاد رکھی گئی۔ الحمد للہ!
                 </p>
               </div>

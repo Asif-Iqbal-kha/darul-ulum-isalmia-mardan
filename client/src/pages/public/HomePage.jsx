@@ -228,11 +228,11 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiBookOpen size={22} />
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
-                    نکتہ ۱
+                <div className="objective-card-meta">
+                  <span className="objective-num-tag">
+                    ہدف ۱
                   </span>
-                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                  <h3 className="objective-card-title">
                     قرآن و حدیث کی عملی زندگی میں ترویج
                   </h3>
                 </div>
@@ -247,11 +247,11 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiAward size={22} />
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
-                    نکتہ ۲
+                <div className="objective-card-meta">
+                  <span className="objective-num-tag">
+                    ہدف ۲
                   </span>
-                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                  <h3 className="objective-card-title">
                     عصری تقاضوں سے ہم آہنگ تعلیم
                   </h3>
                 </div>
@@ -266,11 +266,11 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiUsers size={22} />
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
-                    نکتہ ۳
+                <div className="objective-card-meta">
+                  <span className="objective-num-tag">
+                    ہدف ۳
                   </span>
-                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                  <h3 className="objective-card-title">
                     تخصصات و شعبہ ہائے زندگی میں خدمات
                   </h3>
                 </div>
@@ -285,11 +285,11 @@ export default function HomePage() {
                 <div className="objective-card-icon">
                   <FiShield size={22} />
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--color-primary)', color: '#fff', padding: '1px 7px', borderRadius: '10px', fontWeight: 700 }}>
-                    نکتہ ۷
+                <div className="objective-card-meta">
+                  <span className="objective-num-tag">
+                    ہدف ۷
                   </span>
-                  <h3 className="objective-card-title" style={{ fontSize: '1.05rem', margin: '3px 0 0' }}>
+                  <h3 className="objective-card-title">
                     نوجوان طبقے کی فکری و اخلاقی حفاظت
                   </h3>
                 </div>
