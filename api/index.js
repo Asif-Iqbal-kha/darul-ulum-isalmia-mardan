@@ -51,19 +51,9 @@ async function connectToDatabase() {
     });
     isConnected = db.connections[0].readyState === 1;
 
-    // Check if initial admin seeding is needed
-    const User = require('../server/models/User');
-    const userCount = await User.countDocuments();
-
-    if (userCount === 0) {
-      const User = require('../server/models/User');
-      await User.create({
-        name: 'ایڈمن',
-        username: 'admin',
-        password: 'admin123',
-        role: 'master_admin',
-      });
-    }
+    // Ensure admin and teacher accounts exist with credentials from env vars
+    const ensureAuthUsers = require('../server/config/ensureAuthUsers');
+    await ensureAuthUsers();
   } catch (err) {
     console.error('Serverless MongoDB Connection Error:', err);
     throw err;
