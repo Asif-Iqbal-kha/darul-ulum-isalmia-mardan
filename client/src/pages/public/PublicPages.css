@@ -2516,11 +2516,10 @@
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
-    padding: 20px 24px !important;
+    padding: 18px 22px !important;
     border: 2px solid #000000 !important;
     box-shadow: none !important;
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
+    background: #ffffff !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -2529,6 +2528,21 @@
     visibility: visible !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+
+  .sheet-rules-section {
+    page-break-before: always !important;
+    break-before: page !important;
+    border: 2px solid #000000 !important;
+    padding: 20px 24px !important;
+    margin-top: 0 !important;
+  }
+
+  .sheet-office-use-card,
+  .sheet-guardian-declaration-box,
+  .sheet-final-pledge-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 }
 
@@ -3257,6 +3271,322 @@
 #agreePledge {
   scroll-margin-top: 140px;
 }
+
+/* ===================================================
+   OFFICIAL PHYSICAL ADMISSION SHEET ENHANCEMENTS
+   (Faithfully mirroring physical document of Darul Uloom Islamia Mardan)
+=================================================== */
+
+/* Residence Selector Box at top */
+.sheet-residence-container {
+  margin: 14px 0 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.sheet-residence-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 580px;
+}
+
+.sheet-residence-card {
+  flex: 1;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.15rem;
+  color: #1e293b;
+}
+
+.sheet-residence-card input[type="radio"] {
+  display: none;
+}
+
+.sheet-residence-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #64748b;
+  border-radius: 3px;
+  background: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #18225e;
+}
+
+.sheet-residence-card--active {
+  background: #eff6ff;
+  border-color: #18225e;
+  color: #18225e;
+  font-weight: 700;
+}
+
+.sheet-residence-card--active .sheet-residence-indicator {
+  border-color: #18225e;
+  background: #18225e;
+  color: #ffffff;
+}
+
+/* Badge Title under Madrassa Header */
+.sheet-section-title-badge {
+  display: inline-block;
+  background: #18225e;
+  color: #ffffff;
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 3px 28px;
+  border-radius: 3px;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* Guardian Declaration Box (Page 1) */
+.sheet-guardian-declaration-box {
+  background: #fdfdfc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 22px 0 16px;
+  text-align: justify;
+}
+
+.declaration-text {
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.15rem;
+  line-height: 2.2;
+  color: #1e293b;
+  margin: 0 0 14px;
+}
+
+.sheet-declaration-sigs {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 14px;
+  padding-top: 10px;
+}
+
+.declaration-sig-item {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.sig-underline {
+  flex: 1;
+  border-bottom: 1.5px dotted #64748b;
+  min-width: 120px;
+}
+
+/* Office Use Card (Page 1) */
+.sheet-office-use-card {
+  border: 2px solid #0f172a;
+  border-radius: 4px;
+  margin: 18px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.office-card-title {
+  background: #0f172a;
+  color: #ffffff;
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 6px 10px;
+  letter-spacing: 0.5px;
+}
+
+.office-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #cbd5e1;
+  padding: 1px;
+}
+
+.office-grid-cell {
+  background: #ffffff;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #1e293b;
+}
+
+.office-grid-cell strong {
+  color: #334155;
+  white-space: nowrap;
+}
+
+.office-sig-cell {
+  grid-column: span 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.sig-underline-short {
+  flex: 1;
+  border-bottom: 1.5px dotted #64748b;
+  min-width: 80px;
+}
+
+/* 25 Rules Section (Page 2) */
+.sheet-rules-section {
+  border: 2px solid #18225e;
+  border-radius: 4px;
+  padding: 24px 26px;
+  margin: 28px 0 16px;
+  background: #ffffff;
+}
+
+.sheet-rules-header {
+  text-align: center;
+  border-bottom: 2px solid #18225e;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.sheet-rules-heading {
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #18225e;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sheet-rules-25-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule-25-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 2.1;
+  font-size: 1.08rem;
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  color: #1e293b;
+  text-align: justify;
+}
+
+.rule-idx {
+  font-weight: 700;
+  color: #18225e;
+  flex-shrink: 0;
+  font-family: var(--font-english, sans-serif);
+  font-size: 0.95rem;
+  padding-top: 3px;
+  min-width: 28px;
+}
+
+.rule-text {
+  flex: 1;
+}
+
+/* Final Pledge Card */
+.sheet-final-pledge-card {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-top: 3px solid #18225e;
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin-top: 18px;
+}
+
+.pledge-strong-title {
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #18225e;
+  margin: 0 0 8px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.pledge-binding-line {
+  font-family: var(--font-heading, 'Jameel Noori Nastaleeq', serif);
+  font-size: 1.15rem;
+  color: #334155;
+  margin: 0 0 16px;
+  line-height: 2;
+  text-align: center;
+}
+
+.sheet-pledge-dual-sigs {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin: 16px 0 14px;
+  padding: 12px 10px;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 3px;
+}
+
+.pledge-sig-col {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+@media (max-width: 768px) {
+  .office-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sheet-declaration-sigs,
+  .sheet-pledge-dual-sigs {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .sheet-residence-card {
+    min-width: 90px !important;
+    padding: 6px 8px !important;
+    font-size: 1rem !important;
+  }
+
+  .rule-25-item {
+    font-size: 0.98rem !important;
+    line-height: 1.85 !important;
+  }
+}
+
 
 /* ===================================================
    MUHTAMIM MESSAGE PAGE STYLES (Message from Principal)

@@ -16,19 +16,50 @@ import './PublicPages.css';
 import SEOHead from '../../components/common/SEOHead';
 import { compressImage } from '../../utils/imageCompressor';
 
+const ADMISSION_RULES_25 = [
+  'کلاس چہارم میں طالب علم کی عمر (9) سال سے کم نہ ہو۔ داخلہ کے وقت طالب علم کے والد صاحب کے شناختی کارڈ کی فوٹو کاپی اور متعلقہ طالب علم کا فارم (ب) لانا لازمی ہے۔',
+  'داخلہ کے لئے دارالعلوم کے منعقدہ امتحان میں کامیابی حاصل کرنا ضروری ہے جس میں ناظرہ، اردو، ریاضی اور انگریزی کا امتحان ہوگا۔',
+  'امیدوار کا داخلہ ہونے کی صورت میں اس کے والد صاحب/سرپرست (جو کہ طالب علم کے تمام امور کا ذمہ دار ہے) کا دارالعلوم میں طالب علم کے ساتھ آنا لازمی ہے۔',
+  'داخلہ ابتدائی تین ماہ کے لئے عارضی ہوگا، بعد ازاں طالب علم کی تعلیمی کارکردگی اور دیگر معاملات کے جائزہ لینے کے بعد مستقل داخلہ دیا جائے گا۔',
+  'داخلہ فارم یا داخلہ کے دیگر مراحل میں امیدوار یا سرپرست کی طرف سے کسی غلط بیانی / بے قاعدگی ثابت ہونے پر طالب علم کا داخلہ منسوخ کر دیا جائے گا۔',
+  'دارالعلوم کے ہر طالب علم کے لئے شریعت کی پابندی اور اپنی وضع قطع سنت کے مطابق رکھنا لازمی ہے۔ ہر قسم نشہ آور اشیاء رکھنا شرعاً، عرفاً اور اخلاقاً جرم ہے، اس سے اجتناب ضروری ہے بصورتِ دیگر دارالعلوم سے خارج کیا جائے گا۔',
+  'سکول کے امتحان میں داخلہ لینے سے پہلے ناظم تعلیمات سے اجازت لینا لازمی ہے۔',
+  'کسی قسم کی تنظیم سازی، جلسے جلوس کا انعقاد، کسی بھی تنظیم کے ساتھ عملی وابستگی یا دوسرے طلباء کو اس کی ترغیب دینا، اشتہارات، اسٹیکر، بیج اور کیلنڈر وغیرہ کا دارالعلوم کی دیواروں کھڑکیوں پر لگانا یا پاس رکھنا، سیاسی و فرقہ وارانہ بحث و مباحثہ اور ملک دشمن عناصر کے ساتھ روابط رکھنا ممنوع ہے۔',
+  'تعلیمی سال کے دوران دارالعلوم کی طرف سے سیاسی اجتماعات/جلسے جلوسوں میں شرکت سخت ممنوع ہے، منتظمین دارالعلوم ایسے طلباء کے کسی عمل کی ذمہ دار نہ ہوگی۔',
+  'تعلیمی سال کے دوران دارالعلوم سے اخراج کی صورت میں سرپرست / والد کو ممکنہ ذرائع سے مطلع کیا جائے گا۔',
+  'داخلہ کے بعد مہتمم دارالعلوم کی تحریری اجازت کے بغیر تعلیمی سال کے دوران سالانہ امتحان سے پہلے دارالعلوم چھوڑنے کی اجازت نہیں ہوگی۔',
+  'دارالعلوم کے قواعد و ضوابط کی خلاف ورزی طالب علم کے اخراج کا موجب بن سکتی ہے۔',
+  'تجویز کردہ درجہ میں طالب علم کو داخلہ ملنے کے بعد سہ ماہی امتحان تک اگر متعلقہ اساتذہ کرام کی رائے میں اس درجہ میں چلنے کی استعداد کا حامل نہ سمجھا گیا تو ناظم تعلیمات کو طالب علم کو نچلے درجہ میں منتقل کرنے یا خارج کر دینے کا اختیار ہوگا۔',
+  'ترقیِ درجہ کے لئے سالانہ امتحان پاس کرنا لازمی ہے۔ سالانہ امتحان دینے سے پہلے دارالعلوم چھوڑنے کی صورت میں اگلے درجہ میں داخلے کا مجاز نہ ہوگا۔',
+  'وہ طلباء جو دارالعلوم میں رہائشی ہیں یا دوپہر کا کھانا دارالعلوم میں کھاتے ہیں، ان کا نگران کی اجازت کے بغیر باہر نکلنا منع ہے۔',
+  'دارالعلوم کی حدود میں موبائل فون لانا، استعمال کرنا قطعاً ممنوع ہے۔ بصورتِ دیگر ضبط کیا جائے گا، نیز کیمرے والے فون ضبط ہونے کی صورت میں ناقابلِ واپسی ہوں گے۔ امتحانی ہال میں موبائل ضبط کیا جائے گا اور امتحان کالعدم تصور ہوگا۔',
+  'دارالعلوم کی حدود میں چاقو، چھری، یا اسلحہ لانا قانوناً جرم ہے۔',
+  'بے ریش طلباء کرام کے لئے سر کا بال مشین کرنا لازمی ہے۔',
+  'چھ (6) دن مسلسل غیر حاضری کی صورت میں طالب علم کا اخراج کیا جائے گا۔ بیماری کی صورت میں ناظم تعلیمات سے تحریری اجازت لینا لازمی ہوگا۔',
+  'ہر طالب علم پر لازم ہے کہ دارالعلوم کی وقف اشیاء (تپائیاں، دروازے، کھڑکیاں، قالین وغیرہ) کے ضائع اور خراب کرنے کی صورت میں متعلقہ طالب علم سے تاوان لیا جائے گا۔',
+  'تا قیامِ دارالعلوم میری طرف سے مہتمم/ناظم دارالعلوم / یا جس کو وہ اجازت دیں، اس کا اختیار ہوگا کہ وہ زکوٰۃ، صدقات وصول کر کے طلباء کی ضروریات طعام، قیام، تعلیم وغیرہ میں حسبِ صوابدید خرچ کریں یا دارالعلوم پر وقف کریں۔',
+  'رہائشی طلبہ کے لئے روزانہ مغرب کی اذان سے پہلے مدرسہ میں حاضری لازمی ہے۔ ایک مہینہ میں تین دن کی غیر حاضری کرنے کی وجہ سے سرپرست کو بلایا جائے گا۔',
+  'رہائشی طلباء کے لئے جمعہ کے دن نمازِ عصر کے بعد حاضری ضروری ہے جس کی ذمہ داری ضامن پر عائد ہوگی۔',
+  'تین ماہ پیشگی فیس جمع کرانا لازمی ہے۔',
+  'منتظمین دارالعلوم کو اختیار حاصل ہے کہ طالب علم کی فیس طعام یا دیگر ضروریاتِ دارالعلوم میں خرچ کریں۔'
+];
+
 export default function AdmissionPage() {
   const [form, setForm] = useState({
+    residenceType: 'رہائشی',
     studentName: '',
     fatherName: '',
+    nationality: 'پاکستانی',
     dateOfBirth: '',
+    cnic: '',
+    fatherCnic: '',
+    secularEducation: '',
+    previousEducation: '',
+    desiredClass: 'حفظ قرآن کریم',
     identificationMark: '',
     maritalStatus: 'مجرد',
     permanentAddress: '',
     currentAddress: '',
-    cnic: '',
-    phone: '',
-    desiredClass: 'حفظ قرآن کریم',
-    previousEducation: '',
     guardianName: '',
     guardianFatherName: '',
     guardianRelation: 'والد',
@@ -36,6 +67,7 @@ export default function AdmissionPage() {
     guardianCnic: '',
     guardianPermanentAddress: '',
     guardianCurrentAddress: '',
+    phone: '',
     mardanRelative: '',
     admissionFee: 1000,
     paymentMethod: 'JazzCash',
@@ -232,17 +264,20 @@ export default function AdmissionPage() {
 
   const resetForm = () => {
     setForm({
+      residenceType: 'رہائشی',
       studentName: '',
       fatherName: '',
+      nationality: 'پاکستانی',
       dateOfBirth: '',
+      cnic: '',
+      fatherCnic: '',
+      secularEducation: '',
+      previousEducation: '',
+      desiredClass: 'حفظ قرآن کریم',
       identificationMark: '',
       maritalStatus: 'مجرد',
       permanentAddress: '',
       currentAddress: '',
-      cnic: '',
-      phone: '',
-      desiredClass: 'حفظ قرآن کریم',
-      previousEducation: '',
       guardianName: '',
       guardianFatherName: '',
       guardianRelation: 'والد',
@@ -250,6 +285,7 @@ export default function AdmissionPage() {
       guardianCnic: '',
       guardianPermanentAddress: '',
       guardianCurrentAddress: '',
+      phone: '',
       mardanRelative: '',
       admissionFee: 1000,
       paymentMethod: 'JazzCash',
@@ -316,114 +352,51 @@ export default function AdmissionPage() {
                   />
                 </div>
 
-                {/* Center Title & Madrassa Info */}
+                {/* Center Title & Madrassa Info (Exact to paper form) */}
                 <div className="sheet-header-center">
-                  <h1 className="sheet-title-main">داخلہ فارم</h1>
-                  <h2 className="sheet-madrassa-name">جامعہ دارالعلوم اسلامیہ مردان</h2>
-                  <p className="sheet-madrassa-location">مردان، خیبرپختونخوا، پاکستان</p>
+                  <h1 className="sheet-title-main">
+                    داخلہ فارم {form.desiredClass ? form.desiredClass : 'حفظ القرآن الکریم'}
+                  </h1>
+                  <h2 className="sheet-madrassa-name">دارالعلوم اسلامیہ مردان (گلشن حقانیہ رنگ روڈ مردان)</h2>
                   <p style={{ margin: '2px 0 6px', fontSize: '0.78rem', color: '#374151', fontWeight: 600 }}>
                     رجسٹرڈ حکومتِ پاکستان: 59942/18649 (19/05/2025) | ملحق وفاق المدارس: 32373 (07/07/2026)
                   </p>
-                  <div className="sheet-class-badge">
-                    <span>برائے درجہ: </span>
-                    <select
-                      id="desiredClass"
-                      name="desiredClass"
-                      value={form.desiredClass}
-                      onChange={(e) => handleChange('desiredClass', e.target.value)}
-                      style={{
-                        background: 'transparent',
-                        color: '#fff',
-                        border: 'none',
-                        fontSize: '0.88rem',
-                        fontWeight: 700,
-                        outline: 'none',
-                        cursor: 'pointer',
-                        fontFamily: 'inherit',
-                      }}
-                    >
-                      {classes.length > 0 ? (
-                        classes.map((c) => (
-                          <option key={c._id} value={c.name} style={{ color: '#000' }}>
-                            {c.name}
-                          </option>
-                        ))
-                      ) : (
-                        <>
-                          <option value="حفظ قرآن کریم" style={{ color: '#000' }}>حفظ قرآن کریم</option>
-                          <option value="ناظرہ" style={{ color: '#000' }}>ناظرہ</option>
-                        </>
-                      )}
-                    </select>
-                  </div>
+                  <div className="sheet-section-title-badge">کوائف طالب علم</div>
                 </div>
 
                 {/* Madrassa Logo (Right) */}
                 <div className="sheet-logo-box">
-                  <img src="/logo.png" alt="لوگو جامعہ دارالعلوم اسلامیہ مردان" />
+                  <img src="/logo.png" alt="لوگو دارالعلوم اسلامیہ مردان" />
                 </div>
               </div>
 
               {/* FORM FIELDS */}
               <form onSubmit={handleSubmit}>
-                {/* SECTION 1: STUDENT INFORMATION */}
-                <div style={{ textAlign: 'right' }}>
-                  <div className="sheet-section-pill">طالب علم کی معلومات</div>
-                </div>
-
-                {/* Row 1: Form No & Date */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">فارم نمبر:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      value="ADM-2026-AUTO"
-                      readOnly
-                      disabled
-                      style={{ color: '#6b7280', fontFamily: 'var(--font-english)' }}
-                    />
-                  </div>
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">تاریخ:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      value={currentDate}
-                      readOnly
-                      disabled
-                      style={{ direction: 'ltr', textAlign: 'right', fontFamily: 'var(--font-english)' }}
-                    />
+                {/* Residence Type 3-Box Selector (Exact as top of user physical form) */}
+                <div className="sheet-residence-container">
+                  <div className="sheet-residence-row">
+                    {['رہائشی', 'غیر رہائشی', 'جزوقتی'].map((type) => (
+                      <label
+                        key={type}
+                        className={`sheet-residence-card ${form.residenceType === type ? 'sheet-residence-card--active' : ''}`}
+                      >
+                        <input
+                          type="radio"
+                          name="residenceType"
+                          value={type}
+                          checked={form.residenceType === type}
+                          onChange={(e) => handleChange('residenceType', e.target.value)}
+                        />
+                        <span className="sheet-residence-indicator">
+                          {form.residenceType === type ? '✓ ' : ''}
+                        </span>
+                        <span className="sheet-residence-name">{type}</span>
+                      </label>
+                    ))}
                   </div>
                 </div>
 
-                {/* Row 2: Admission No & Code No (Office Record) */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">داخلہ نمبر:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="(برائے دفتری ریکارڈ)"
-                      readOnly
-                      disabled
-                      style={{ color: '#9ca3af' }}
-                    />
-                  </div>
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">کوڈ نمبر:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="(برائے دفتری ریکارڈ)"
-                      readOnly
-                      disabled
-                      style={{ color: '#9ca3af' }}
-                    />
-                  </div>
-                </div>
-
-                {/* Row 3: Name & Father Name */}
+                {/* Row 1: Name & Father Name */}
                 <div className="sheet-form-row">
                   <div className="sheet-field-half">
                     <span className="sheet-label">نام: *</span>
@@ -432,7 +405,7 @@ export default function AdmissionPage() {
                       name="studentName"
                       type="text"
                       className={`sheet-input-dotted ${errors.studentName ? 'sheet-input-error' : ''}`}
-                      placeholder="طالب علم کا مکمل نام درج کریں"
+                      placeholder="طالب علم کا نام"
                       value={form.studentName}
                       onChange={(e) => handleChange('studentName', e.target.value)}
                     />
@@ -449,7 +422,7 @@ export default function AdmissionPage() {
                       name="fatherName"
                       type="text"
                       className={`sheet-input-dotted ${errors.fatherName ? 'sheet-input-error' : ''}`}
-                      placeholder="والد محترم کا نام درج کریں"
+                      placeholder="والد محترم کا نام"
                       value={form.fatherName}
                       onChange={(e) => handleChange('fatherName', e.target.value)}
                     />
@@ -461,10 +434,20 @@ export default function AdmissionPage() {
                   </div>
                 </div>
 
-                {/* Row 4: Date of Birth, ID Mark & Marital Status */}
+                {/* Row 2: Nationality & Date of Birth */}
                 <div className="sheet-form-row">
-                  <div className="sheet-field-half" style={{ flex: '1.2' }}>
-                    <span className="sheet-label">تاریخِ پیدائش: *</span>
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">شہریت:</span>
+                    <input
+                      type="text"
+                      className="sheet-input-dotted"
+                      placeholder="مثلاً پاکستانی"
+                      value={form.nationality}
+                      onChange={(e) => handleChange('nationality', e.target.value)}
+                    />
+                  </div>
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">تاریخ پیدائش: *</span>
                     <input
                       id="dateOfBirth"
                       name="dateOfBirth"
@@ -480,68 +463,12 @@ export default function AdmissionPage() {
                       </span>
                     )}
                   </div>
+                </div>
+
+                {/* Row 3: Student CNIC/B-Form & Father CNIC */}
+                <div className="sheet-form-row">
                   <div className="sheet-field-half">
-                    <span className="sheet-label">شناختی علامت:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="چہرے یا ہاتھ پر کوئی علامت"
-                      value={form.identificationMark}
-                      onChange={(e) => handleChange('identificationMark', e.target.value)}
-                    />
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span className="sheet-label">حالت:</span>
-                    <select
-                      value={form.maritalStatus}
-                      onChange={(e) => handleChange('maritalStatus', e.target.value)}
-                      style={{
-                        border: 'none',
-                        borderBottom: '1px dotted #374151',
-                        background: 'transparent',
-                        padding: '4px',
-                        outline: 'none',
-                        fontSize: '0.88rem',
-                      }}
-                    >
-                      <option value="مجرد">مجرد (غیر شادی شدہ)</option>
-                      <option value="متزوج">متزوج (شادی شدہ)</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Row 5: Permanent Address */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">مستقل پتہ: *</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="گاؤں / محلہ، ڈاکخانہ، تحصیل و ضلع"
-                      value={form.permanentAddress}
-                      onChange={(e) => handleChange('permanentAddress', e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* Row 6: Present Address */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">موجودہ پتہ:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="موجودہ رہائش کا پتہ (اگر مستقل سے مختلف ہو)"
-                      value={form.currentAddress}
-                      onChange={(e) => handleChange('currentAddress', e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* Row 7: CNIC & Phone */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-half" style={{ flex: 1.3 }}>
-                    <span className="sheet-label">طالب علم کا قومی شناختی کارڈ / ب فارم:</span>
+                    <span className="sheet-label">طالب علم کا شناختی کارڈ/فارم ب نمبر:</span>
                     <input
                       type="text"
                       className="sheet-input-dotted"
@@ -553,7 +480,91 @@ export default function AdmissionPage() {
                     />
                   </div>
                   <div className="sheet-field-half">
-                    <span className="sheet-label">رابطہ کیلئے فون نمبر: *</span>
+                    <span className="sheet-label">والد صاحب کا شناختی کارڈ نمبر:</span>
+                    <input
+                      type="text"
+                      className="sheet-input-dotted"
+                      placeholder="12345-1234567-1"
+                      value={form.fatherCnic}
+                      onChange={(e) => handleChange('fatherCnic', e.target.value)}
+                      style={{ direction: 'ltr', textAlign: 'right', fontFamily: 'var(--font-english)' }}
+                      maxLength="15"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 4: Secular Education & Class */}
+                <div className="sheet-form-row">
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">علوم عصریہ:</span>
+                    <input
+                      type="text"
+                      className="sheet-input-dotted"
+                      placeholder="پرائمری، مڈل، سکول کا نام وغیرہ"
+                      value={form.secularEducation}
+                      onChange={(e) => handleChange('secularEducation', e.target.value)}
+                    />
+                  </div>
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">الدرجہ: *</span>
+                    <select
+                      id="desiredClass"
+                      name="desiredClass"
+                      value={form.desiredClass}
+                      onChange={(e) => handleChange('desiredClass', e.target.value)}
+                      className="sheet-input-dotted"
+                      style={{ padding: '4px', cursor: 'pointer', fontFamily: 'inherit' }}
+                    >
+                      {classes.length > 0 ? (
+                        classes.map((c) => (
+                          <option key={c._id} value={c.name}>
+                            {c.name}
+                          </option>
+                        ))
+                      ) : (
+                        <>
+                          <option value="حفظ قرآن کریم">حفظ قرآن کریم</option>
+                          <option value="ناظرہ">ناظرہ</option>
+                        </>
+                      )}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Row 5: Guardian Name & Relation */}
+                <div className="sheet-form-row">
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">ضامن/سرپرست کا نام:</span>
+                    <input
+                      type="text"
+                      className="sheet-input-dotted"
+                      placeholder="سرپرست یا ضامن کا نام"
+                      value={form.guardianName}
+                      onChange={(e) => handleChange('guardianName', e.target.value)}
+                    />
+                  </div>
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">سرپرست سے رشتہ:</span>
+                    <select
+                      value={form.guardianRelation}
+                      onChange={(e) => handleChange('guardianRelation', e.target.value)}
+                      className="sheet-input-dotted"
+                      style={{ padding: '4px', cursor: 'pointer', fontFamily: 'inherit' }}
+                    >
+                      <option value="والد">والد</option>
+                      <option value="چچا">چچا</option>
+                      <option value="دادا">دادا</option>
+                      <option value="بڑا بھائی">بڑا بھائی</option>
+                      <option value="ماموں">ماموں</option>
+                      <option value="دیگر">دیگر</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Row 6: Phone Numbers */}
+                <div className="sheet-form-row">
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">والد صاحب/بھائی صاحب کا نمبر: *</span>
                     <input
                       id="phone"
                       name="phone"
@@ -570,76 +581,8 @@ export default function AdmissionPage() {
                       </span>
                     )}
                   </div>
-                </div>
-
-                {/* Previous Education */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">سابقہ تعلیم:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="مثلاً ناظرہ مکمل، پرائمری پاس یا حفظ مکمل مع مدرسہ کا نام"
-                      value={form.previousEducation}
-                      onChange={(e) => handleChange('previousEducation', e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* SECTION 2: GUARDIAN INFORMATION */}
-                <div style={{ textAlign: 'right', marginTop: '10px' }}>
-                  <div className="sheet-section-pill">سرپرست کی معلومات</div>
-                </div>
-
-                {/* Row 1: Guardian Name, Father Name & Relation */}
-                <div className="sheet-form-row">
                   <div className="sheet-field-half">
-                    <span className="sheet-label">سرپرست کا نام:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="سرپرست کا نام"
-                      value={form.guardianName}
-                      onChange={(e) => handleChange('guardianName', e.target.value)}
-                    />
-                  </div>
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">ولدیت:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="سرپرست کے والد کا نام"
-                      value={form.guardianFatherName}
-                      onChange={(e) => handleChange('guardianFatherName', e.target.value)}
-                    />
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span className="sheet-label">امیدوار سے رشتہ:</span>
-                    <select
-                      value={form.guardianRelation}
-                      onChange={(e) => handleChange('guardianRelation', e.target.value)}
-                      style={{
-                        border: 'none',
-                        borderBottom: '1px dotted #374151',
-                        background: 'transparent',
-                        padding: '4px',
-                        outline: 'none',
-                        fontSize: '0.88rem',
-                      }}
-                    >
-                      <option value="والد">والد</option>
-                      <option value="چچا">چچا</option>
-                      <option value="دادا">دادا</option>
-                      <option value="بڑا بھائی">بڑا بھائی</option>
-                      <option value="ماموں">ماموں</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Row 2: Guardian Phone & CNIC */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-half">
-                    <span className="sheet-label">سرپرست کا فون نمبر:</span>
+                    <span className="sheet-label">سرپرست کا نمبر:</span>
                     <input
                       type="tel"
                       className="sheet-input-dotted"
@@ -649,160 +592,81 @@ export default function AdmissionPage() {
                       style={{ direction: 'ltr', textAlign: 'right', fontFamily: 'var(--font-english)' }}
                     />
                   </div>
+                </div>
+
+                {/* Row 7: Permanent & Current Address */}
+                <div className="sheet-form-row">
                   <div className="sheet-field-half">
-                    <span className="sheet-label">شناختی کارڈ نمبر:</span>
+                    <span className="sheet-label">مستقل پتہ:</span>
                     <input
                       type="text"
                       className="sheet-input-dotted"
-                      placeholder="12345-1234567-1"
-                      value={form.guardianCnic}
-                      onChange={(e) => handleChange('guardianCnic', e.target.value)}
-                      style={{ direction: 'ltr', textAlign: 'right', fontFamily: 'var(--font-english)' }}
-                      maxLength="15"
+                      placeholder="گاؤں / محلہ، ڈاکخانہ، تحصیل و ضلع"
+                      value={form.permanentAddress}
+                      onChange={(e) => handleChange('permanentAddress', e.target.value)}
+                    />
+                  </div>
+                  <div className="sheet-field-half">
+                    <span className="sheet-label">موجودہ پتہ:</span>
+                    <input
+                      type="text"
+                      className="sheet-input-dotted"
+                      placeholder="موجودہ رہائش کا پتہ"
+                      value={form.currentAddress}
+                      onChange={(e) => handleChange('currentAddress', e.target.value)}
                     />
                   </div>
                 </div>
 
-                {/* Row 3: Guardian Permanent Address */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">سرپرست کا مستقل پتہ:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="مکمل مستقل پتہ"
-                      value={form.guardianPermanentAddress}
-                      onChange={(e) => handleChange('guardianPermanentAddress', e.target.value)}
-                    />
+                {/* Guardian Declaration (Page 1 of official physical paper) */}
+                <div className="sheet-guardian-declaration-box">
+                  <p className="declaration-text">
+                    میں مسمی <strong>{form.guardianName || form.fatherName || '................................'}</strong> کامل یقین کے ساتھ شہادت اور اقرار کرتا ہوں کہ مسمی <strong>{form.studentName || '................................'}</strong> بن <strong>{form.fatherName || '................................'}</strong> کے داخلہ فارم میں اس کی تاریخ پیدائش سمیت جو دیگر کوائف درج کئے گئے ہیں وہ میرے علم کے مطابق درست ہیں اور کوئی غلط بیانی نہیں کی گئی۔
+                  </p>
+                  <div className="sheet-declaration-sigs">
+                    <div className="declaration-sig-item">
+                      <span>دستخط سرپرست:</span>
+                      <div className="sig-underline"></div>
+                    </div>
+                    <div className="declaration-sig-item">
+                      <span>دستخط طالب علم:</span>
+                      <div className="sig-underline"></div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Row 4: Guardian Present Address */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">سرپرست کا موجودہ پتہ:</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="مکمل موجودہ پتہ"
-                      value={form.guardianCurrentAddress}
-                      onChange={(e) => handleChange('guardianCurrentAddress', e.target.value)}
-                    />
+                {/* Office Use Section (Page 1 of official physical paper) */}
+                <div className="sheet-office-use-card">
+                  <div className="office-card-title">دفتری استعمال کے لئے</div>
+                  <div className="office-card-grid">
+                    <div className="office-grid-cell">
+                      <strong>تاریخ داخلہ:</strong> <span>{currentDate}</span>
+                    </div>
+                    <div className="office-grid-cell">
+                      <strong>رجسٹریشن نمبر:</strong> <span style={{ color: '#9ca3af' }}>(برائے دفتری ریکارڈ)</span>
+                    </div>
+                    <div className="office-grid-cell">
+                      <strong>داخلہ نمبر:</strong> <span style={{ fontFamily: 'var(--font-english)' }}>ADM-2026-AUTO</span>
+                    </div>
+                    <div className="office-grid-cell">
+                      <strong>مقدار فیس:</strong> <span>1,000 روپے</span>
+                    </div>
+                    <div className="office-grid-cell office-sig-cell">
+                      <strong>دستخط ناظم تعلیمات:</strong>
+                      <div className="sig-underline-short"></div>
+                    </div>
+                    <div className="office-grid-cell office-sig-cell">
+                      <strong>دستخط مہتمم صاحب:</strong>
+                      <div className="sig-underline-short"></div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Row 5: Relative in Mardan */}
-                <div className="sheet-form-row">
-                  <div className="sheet-field-full">
-                    <span className="sheet-label">مردان میں قریبی رشتہ دار؟</span>
-                    <input
-                      type="text"
-                      className="sheet-input-dotted"
-                      placeholder="اس کا نام، پتہ اور فون نمبر درج فرمائیں"
-                      value={form.mardanRelative}
-                      onChange={(e) => handleChange('mardanRelative', e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* Guardian Instruction Footnote */}
-                <p
-                  style={{
-                    fontSize: '0.78rem',
-                    color: '#6b7280',
-                    textAlign: 'center',
-                    lineHeight: '1.6',
-                    marginTop: '8px',
-                    marginBottom: '16px',
-                    padding: '6px 12px',
-                    background: '#f9fafb',
-                    borderRadius: '4px',
-                  }}
-                >
-                  <strong>نوٹ:</strong> سرپرست سے مراد والد، چچا، دادا، بڑا بھائی اور ماموں ہیں جن کی نگرانی اور سرپرستی میں آپ مدرسے میں ہیں اور بوقتِ ضرورت جامعہ کو ان سے رابطہ کرنا ہے۔ محرم رشتہ دار کے علاوہ کسی اور کو سرپرست وغیرہ بطور سرپرست نہ لکھیں۔
-                </p>
-
-                {/* SECTION 3: EXAMINERS EVALUATION TABLE (Exact replica from the bottom of physical form) */}
-                <div style={{ textAlign: 'right', marginTop: '10px' }}>
-                  <div className="sheet-section-pill">برائے ممتحنین (امتحانی و دفتری ریکارڈ)</div>
-                </div>
-
-                <table className="examiners-table">
-                  <thead>
-                    <tr>
-                      <th style={{ width: '40%' }}>عنوان</th>
-                      <th style={{ width: '30%' }}>کل نمبر</th>
-                      <th style={{ width: '30%' }}>حاصل کردہ نمبر</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>ناظرہ</td>
-                      <td style={{ fontFamily: 'var(--font-english)' }}>40</td>
-                      <td style={{ color: '#9ca3af' }}>(بوقتِ انٹرویو)</td>
-                    </tr>
-                    <tr>
-                      <td>تلفظ</td>
-                      <td style={{ fontFamily: 'var(--font-english)' }}>10</td>
-                      <td style={{ color: '#9ca3af' }}>(بوقتِ انٹرویو)</td>
-                    </tr>
-                    <tr>
-                      <td>پرائمری</td>
-                      <td style={{ fontFamily: 'var(--font-english)' }}>50</td>
-                      <td style={{ color: '#9ca3af' }}>(بوقتِ انٹرویو)</td>
-                    </tr>
-                    <tr style={{ background: '#f9fafb', fontWeight: 700 }}>
-                      <td>کل میزان</td>
-                      <td style={{ fontFamily: 'var(--font-english)' }}>100</td>
-                      <td>—</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                {/* Examiner Signature Lines (Office Use) */}
-                <div className="examiners-signatures-grid">
-                  <div className="examiners-sig-item">
-                    <span>ممتحن کی رائے:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>تجویز کا نام:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>ممتحن کے دستخط:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>تجویز کی رائے:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>دستخط ناظم مہتمم:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>تجویز کے دستخط:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>دستخط ناظم تعلیمات:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                  <div className="examiners-sig-item">
-                    <span>تاریخِ داخلہ:</span>
-                    <div className="examiners-sig-line"></div>
-                  </div>
-                </div>
-
-                {/* SECTION 4: ADMISSION FEE & PAYMENT PROOF (MODEST & PROFESSIONAL) */}
-                <div style={{ textAlign: 'right', marginTop: '16px' }}>
-                  <div className="sheet-section-pill">داخلہ فیس و رقم منتقلی کی رسید</div>
-                </div>
-
-                <div className="sheet-fee-box">
+                {/* SECTION: ADMISSION FEE & PAYMENT PROOF (MODEST & PROFESSIONAL) */}
+                <div className="sheet-fee-box no-print">
+                  <div className="sheet-section-pill" style={{ marginBottom: '10px' }}>داخلہ فیس و رقم منتقلی کی رسید</div>
                   <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: '#4b5563', lineHeight: '1.7' }}>
-                    داخلہ فارم کی پروسیسنگ و دفتری اندراج کے لیے فیس مبلغ <strong>1,000 روپے</strong> مختص ہے۔ رقم اکاؤنٹ (JazzCash: 0302-2855766 / EasyPaisa: 0315-3044992 یا Faysal Bank) میں جمع کروا کر رسید کا عکس لازمی منسلک فرمائیں۔
+                    داخلہ فارم کی آن لائن پروسیسنگ کے لیے فیس مبلغ <strong>1,000 روپے</strong> مختص ہے۔ رقم اکاؤنٹ (JazzCash: 0302-2855766 / EasyPaisa: 0315-3044992 یا Faysal Bank) میں جمع کروا کر رسید کا عکس لازمی منسلک فرمائیں۔
                   </p>
 
                   <div className="sheet-form-row" style={{ marginBottom: '10px' }}>
@@ -814,7 +678,7 @@ export default function AdmissionPage() {
                         value="1,000 روپے"
                         readOnly
                         disabled
-                        style={{ color: '#143223', fontWeight: 700 }}
+                        style={{ color: '#18225e', fontWeight: 700 }}
                       />
                     </div>
                     <div className="sheet-field-half" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '6px' }}>
@@ -935,65 +799,61 @@ export default function AdmissionPage() {
                   </div>
                 </div>
 
-                {/* SECTION 5: PLEDGE & CODE OF CONDUCT (Exact from Page 2 of official form) */}
-                <div className="pledge-card">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h4 style={{ margin: 0, color: '#143223', fontSize: '0.95rem', fontWeight: 700 }}>
-                      عہد نامہ از طالب علم و سرپرست (مختصر قواعد و ضوابط)
-                    </h4>
-                    <button
-                      type="button"
-                      onClick={() => setShowPledgeDetails(!showPledgeDetails)}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: '#143223',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        fontSize: '0.78rem',
-                      }}
-                    >
-                      {showPledgeDetails ? 'مختصر کریں ▲' : 'مکمل 16 نکات پڑھیں ▼'}
-                    </button>
+                {/* SECTION: OFFICIAL RULES & CODE OF CONDUCT (All 25 Rules + Final Binding Pledge) */}
+                <div className="sheet-rules-section">
+                  <div className="sheet-rules-header">
+                    <h3 className="sheet-rules-heading">
+                      شرائط و ضوابط داخلہ (دارالعلوم اسلامیہ مردان گلشن حقانیہ رنگ روڈ مردان)
+                    </h3>
                   </div>
 
-                  {showPledgeDetails ? (
-                    <ol className="pledge-list">
-                      <li>جامعہ کے تمام اصول و ضوابط اور وُقتاً فوقتاً جاری ہونے والی ہدایات کی پابندی کروں گا۔</li>
-                      <li>تمام احکاماتِ شرعیہ کی پابندی کروں گا، بالخصوص نماز باجماعت کا اہتمام کروں گا اور محرماتِ شرعیہ سے اجتناب کروں گا۔</li>
-                      <li>اپنی وضع قطع علماء و صلحاء کے مطابق رکھوں گا، بالخصوص ڈاڑھی منڈوانے یا ایک مشت سے کم ترشوانے سے اجتناب کروں گا۔</li>
-                      <li>حصولِ تعلیم اور اصلاحِ اعمال و اخلاق پر توجہ مرکوز رکھوں گا، اور سیاسی سرگرمیوں سے کلی اجتناب کروں گا۔</li>
-                      <li>جامعہ کے تمام اساتذہ و ملازمین کا ادب و احترام کروں گا اور ساتھی طلباء سے حسنِ اخلاق سے پیش آؤں گا۔</li>
-                      <li>جامعہ کے اندر اسلحہ یا نقصان دہ اشیاء ہرگز نہیں رکھوں گا۔</li>
-                      <li>مسجد و جامعہ کی دیواروں، کمروں اور اثاثہ جات کی صفائی و حفاظت کا مکمل اہتمام کروں گا۔</li>
-                      <li>روزمرہ اسباق، تکرار اور مطالعہ کے اوقات کی پابندی کروں گا اور بلا رخصت غیر حاضر نہیں رہوں گا۔</li>
-                      <li>موبائل فون سے متعلق جامعہ کی پالیسی کی مکمل پابندی کروں گا۔</li>
-                      <li>والدین/سرپرست وقتاً فوقتاً جامعہ کے ناظم اور کلاس انچارج سے طالب علم کی خیریت و کارکردگی معلوم کرتے رہیں گے۔</li>
-                    </ol>
-                  ) : (
-                    <p style={{ margin: '8px 0 0', fontSize: '0.82rem', color: '#4b5563', lineHeight: '1.7' }}>
-                      طالب علم تمام شرعی احکامات، باجماعت نماز، وضع قطع سنت کے مطابق رکھنے، اساتذہ کا ادب، اور سیاسی سرگرمیوں و غیر حاضری سے کلی اجتناب کرنے کا پابند ہوگا۔
-                    </p>
-                  )}
+                  <ol className="sheet-rules-25-list">
+                    {ADMISSION_RULES_25.map((rule, idx) => (
+                      <li key={idx} className="rule-25-item">
+                        <span className="rule-idx">({idx + 1})</span>
+                        <span className="rule-text">{rule}</span>
+                      </li>
+                    ))}
+                  </ol>
 
-                  <label className="pledge-checkbox-label">
-                    <input
-                      id="agreePledge"
-                      name="agreePledge"
-                      type="checkbox"
-                      checked={agreePledge}
-                      onChange={(e) => setAgreePledge(e.target.checked)}
-                      style={{ width: '16px', height: '16px', accentColor: '#143223' }}
-                    />
-                    <span>
-                      میں صدقِ دل سے جامعہ کے تمام قواعد و ضوابط کو پڑھ کر ان پر کاربند رہنے کا عہد کرتا ہوں۔
-                    </span>
-                  </label>
-                  {errors.agreePledge && (
-                    <span className="form-error-text" style={{ marginTop: '4px' }}>
-                      {errors.agreePledge}
-                    </span>
-                  )}
+                  {/* Final Pledge on Rules Sheet */}
+                  <div className="sheet-final-pledge-card">
+                    <p className="pledge-strong-title">
+                      میں نے دارالعلوم کی ساری ہدایات / شرائط و ضوابط غور سے پڑھ لی ہیں اور میں ان کی پوری پابندی کا عہد کرتا ہوں۔
+                    </p>
+                    <p className="pledge-binding-line">
+                      میں مسمی <strong>{form.studentName || '................................'}</strong> بن <strong>{form.fatherName || '................................'}</strong> پورا سال مذکورہ شرائط کا پابند رہوں گا۔
+                    </p>
+                    <div className="sheet-pledge-dual-sigs">
+                      <div className="pledge-sig-col">
+                        <span>دستخط طالب علم:</span>
+                        <div className="sig-underline"></div>
+                      </div>
+                      <div className="pledge-sig-col">
+                        <span>دستخط سرپرست:</span>
+                        <div className="sig-underline"></div>
+                      </div>
+                    </div>
+
+                    <label className="pledge-checkbox-label">
+                      <input
+                        id="agreePledge"
+                        name="agreePledge"
+                        type="checkbox"
+                        checked={agreePledge}
+                        onChange={(e) => setAgreePledge(e.target.checked)}
+                        style={{ width: '18px', height: '18px', accentColor: '#18225e' }}
+                      />
+                      <span>
+                        میں صدقِ دل سے دارالعلوم اسلامیہ مردان کے تمام ۲۵ شرائط و ضوابط کو پڑھ کر ان پر کاربند رہنے کا عہد کرتا ہوں۔
+                      </span>
+                    </label>
+                    {errors.agreePledge && (
+                      <span className="form-error-text" style={{ marginTop: '4px', display: 'block' }}>
+                        {errors.agreePledge}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* SUBMIT BUTTON & PRINT BAR */}

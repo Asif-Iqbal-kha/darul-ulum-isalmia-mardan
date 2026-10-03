@@ -24,6 +24,23 @@ const admissionApplicationSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Phone is required'],
   },
+  residenceType: {
+    type: String,
+    enum: ['رہائشی', 'غیر رہائشی', 'جزوقتی'],
+    default: 'رہائشی',
+  },
+  nationality: {
+    type: String,
+    default: 'پاکستانی',
+  },
+  fatherCnic: {
+    type: String,
+    default: '',
+  },
+  secularEducation: {
+    type: String,
+    default: '',
+  },
   desiredClass: {
     type: String,
     required: [true, 'Desired class is required'],
