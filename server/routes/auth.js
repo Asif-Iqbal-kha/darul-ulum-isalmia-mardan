@@ -19,13 +19,16 @@ router.post('/login', async (req, res) => {
     const cleanUsername = username.trim().toLowerCase();
     const cleanPassword = password.trim();
 
+    const configuredAdminUsername = (process.env.ADMIN_USERNAME || 'admin_darululoom').trim().toLowerCase();
+    const configuredTeacherUsername = (process.env.TEACHER_USERNAME || 'teacher_darululoom').trim().toLowerCase();
+
     let user = await User.findOne({
       $or: [
         { username: cleanUsername },
         ...(cleanUsername === 'admin' ? [{ role: 'master_admin' }] : []),
         ...(cleanUsername === 'teacher' ? [{ role: 'teacher' }] : []),
-        ...(cleanUsername === 'admin_sadeeq' ? [{ role: 'master_admin' }] : []),
-        ...(cleanUsername === 'teacher_sadeeq' ? [{ role: 'teacher' }] : []),
+        ...(cleanUsername === configuredAdminUsername ? [{ role: 'master_admin' }] : []),
+        ...(cleanUsername === configuredTeacherUsername ? [{ role: 'teacher' }] : []),
       ],
     });
 
@@ -55,22 +58,21 @@ router.post('/login', async (req, res) => {
 
     let isMatch = await user.matchPassword(cleanPassword);
 
-    // Resilient fallback: Also check against configured passwords in .env or defaults
+    // Resilient fallback: Also check against configured passwords in .env
     if (!isMatch) {
-      const defaultAdminPass = process.env.ADMIN_PASSWORD || 'Sadeeq@Admin2026!';
-      const defaultTeacherPass = process.env.TEACHER_PASSWORD || 'Sadeeq@Teacher2026!';
+      const defaultAdminPass = process.env.ADMIN_PASSWORD || 'Mardan@Admin#2026!';
+      const defaultTeacherPass = process.env.TEACHER_PASSWORD || 'Mardan@Teacher#2026!';
 
       if (
         user.role === 'master_admin' &&
-        (cleanPassword === defaultAdminPass || cleanPassword === 'admin123')
+        cleanPassword === defaultAdminPass
       ) {
         isMatch = true;
-        // Self-heal/update password in DB to the entered password
         user.password = cleanPassword;
         await user.save();
       } else if (
         user.role === 'teacher' &&
-        (cleanPassword === defaultTeacherPass || cleanPassword === 'teacher123')
+        cleanPassword === defaultTeacherPass
       ) {
         isMatch = true;
         user.password = cleanPassword;

@@ -9,12 +9,12 @@ const User = require('../models/User');
  */
 async function ensureAuthUsers() {
   try {
-    const adminUsername = (process.env.ADMIN_USERNAME || 'admin_sadeeq').trim().toLowerCase();
-    const adminPassword = process.env.ADMIN_PASSWORD || 'Sadeeq@Admin2026!';
+    const adminUsername = (process.env.ADMIN_USERNAME || 'admin_darululoom').trim().toLowerCase();
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Mardan@Admin#2026!';
     const adminName = process.env.ADMIN_NAME || 'ایڈمن (مدیرِ اعلیٰ)';
 
-    const teacherUsername = (process.env.TEACHER_USERNAME || 'teacher_sadeeq').trim().toLowerCase();
-    const teacherPassword = process.env.TEACHER_PASSWORD || 'Sadeeq@Teacher2026!';
+    const teacherUsername = (process.env.TEACHER_USERNAME || 'teacher_darululoom').trim().toLowerCase();
+    const teacherPassword = process.env.TEACHER_PASSWORD || 'Mardan@Teacher#2026!';
     const teacherName = process.env.TEACHER_NAME || 'استاذ';
 
     // 1. Remove any legacy student users
