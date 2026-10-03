@@ -76,10 +76,10 @@
   --color-error: #DC2626;
   --color-info: #0284C7;
 
-  /* Typography */
-  --font-urdu: 'Gulzar', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Amiri', serif;
-  --font-heading: 'Gulzar', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Amiri', serif;
-  --font-body: 'Gulzar', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Amiri', serif;
+  /* Typography - Prioritize Jameel Noori Nastaleeq */
+  --font-urdu: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', 'Gulzar', serif;
+  --font-heading: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', 'Gulzar', serif;
+  --font-body: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', 'Gulzar', serif;
   --font-english: 'Inter', system-ui, sans-serif;
 
   /* Spacing */

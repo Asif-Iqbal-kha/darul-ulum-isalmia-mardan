@@ -137,6 +137,7 @@
   position: relative;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  font-family: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', serif !important;
 }
 
 /* Subtle Institutional Watermark */
@@ -260,8 +261,8 @@
 }
 
 .rules-section-heading {
-  font-family: var(--font-heading, inherit);
-  font-size: 1.22rem;
+  font-family: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', serif !important;
+  font-size: 1.35rem;
   color: var(--color-primary-dark, #064e3b);
   border-bottom: 1.5px solid #cbd5e1;
   padding-bottom: 6px;
@@ -272,22 +273,24 @@
 }
 
 .rules-paragraph {
-  line-height: 2.1;
+  font-family: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', serif !important;
+  line-height: 2.3;
   color: #334155;
-  font-size: 1rem;
+  font-size: 1.08rem;
   margin: 0 0 10px;
   text-align: justify;
 }
 
 .rules-clause {
+  font-family: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', serif !important;
   background: #ffffff;
   border-right: 3px solid var(--color-primary, #047857);
   padding: 10px 14px;
   margin-bottom: 10px;
   border-radius: 0 6px 6px 0;
-  line-height: 2;
+  line-height: 2.3;
   color: #334155;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   background: #fbfcfe;
 }
 
